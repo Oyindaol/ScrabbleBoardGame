@@ -42,7 +42,7 @@ The project demo for this milestone can be found below:
 **(if any video demo is available)**
 
 ### Known Issues
-- Any known issues should be noted here.
+- The passTurn and displayBoard methods are not completely implemented.
 
 
 ## Future Milestones and Deliverables
