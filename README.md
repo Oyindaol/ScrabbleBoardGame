@@ -35,7 +35,7 @@ A text-based version of Scrabble where players use a keyboard to play the game v
 ### Documentation
 
 Documentation for this project can be found **here**. 
-- NOTE: (link not added yet)
+- NOTE: Link not added yet
 
 ### Demo
 The project demo for this milestone can be found below:
