@@ -9,13 +9,13 @@ A text-based version of Scrabble where players use a keyboard to play the game v
 ### Authors
 #### Ese Iyamu
 - Created the Player class.
-- Worked on user manual aspect of documentation.
+- Worked on the user manual aspect of documentation.
 - Added Java Doc comments to classes and methods.
 
 
 #### Oyindamola Taiwo-Olupeka
 - Worked on the ScrabbleBoard and Square classes.
-- Wrote design decision document.
+- Wrote the design decision document.
 - Added Java Doc comments to classes and methods.
 
 
@@ -35,7 +35,7 @@ A text-based version of Scrabble where players use a keyboard to play the game v
 ### Documentation
 
 Documentation for this project can be found **here**. 
-- NOTE: Link not added yet
+- NOTE: Link not added yet.
 
 ### Demo
 The project demo for this milestone can be found below:
@@ -48,7 +48,7 @@ The project demo for this milestone can be found below:
 ## Future Milestones and Deliverables
 ### Milestone 2
 - GUI-based version of the Scrabble game.
-- Add a GUI to current text-based version of game using GameView and GameController classes.
+- Add a GUI to the current text-based version of the game using GameView and GameController classes.
 - Create unit tests for the Model.
 - Update all UML Diagrams and documentation.
 
@@ -62,9 +62,9 @@ The project demo for this milestone can be found below:
 
 ### Milestone 4
 - Add a multiple level undo and redo feature.
-- Implement Java Serialization and uttlize it to add a save and load feature.
+- Implement Java Serialization and utilize it to add a save and load feature.
 - Create custom boards with alternate placement of premium squares using XML or JSON.
-- Update documentation
+- Update documentation.
 
 ## Change Log
 - Not Applicable.
@@ -79,6 +79,6 @@ The project demo for this milestone can be found below:
 - Design of Scrabble move generation algorithm/method.
 
 ### December 5, 2022
-- Addition of multiple game level undo and redo feature.
+- Addition of multiple game level undo and redo features.
 - Save and load features. 
 - Creation of custom boards.
