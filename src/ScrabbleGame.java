@@ -2,7 +2,7 @@ import java.util.*;
 
 public class ScrabbleGame {
 
-    public static final int SIZE = 15;
+    public static final int SIZE = 14;
     private ArrayList<Player> players;
     private ArrayList<String> letters;
     private ArrayList<Integer> score;
@@ -92,9 +92,10 @@ public class ScrabbleGame {
             System.out.println("The letters from your rack are: ");
             ArrayList<Tile> currentPlayerRack = currentPlayer.getRack();
             ArrayList<String> tileCharacters = new ArrayList<>();
+            ArrayList<Tile> words = new ArrayList<>();
             for(int i=0; i<currentPlayer.getRack().size(); i++){
-                tileCharacters.add(currentPlayerRack.get(i).getCharacter());
-                System.out.println(currentPlayerRack.get(i).getCharacter());
+                tileCharacters.add(currentPlayerRack.get(i).getCharacter());//prints out the letters in the players rack
+                System.out.println(currentPlayerRack.get(i).getCharacter());//print out the characters
             }
             String chosenLetters = scanner.nextLine();
             String[] array = chosenLetters.split(",");
@@ -104,10 +105,58 @@ public class ScrabbleGame {
                 chosenLetters = scanner.nextLine();
                 array = chosenLetters.split(",");
             }
+            for (int i=0; i< array.length; i++){
+                for (int j=0; j<currentPlayerRack.size(); j++){
+                    if (currentPlayerRack.get(j).getCharacter() == array[i]){
+                        words.add(currentPlayerRack.get(j));//if the tile character matches the character in the array list, add that tile to the words arraylist
+                    }
+                }
+            }
+
+            System.out.println("Choose a starting and ending square: ");
+            System.out.println("Enter your first coordinates (Enter the x-value and press enter then type the y-value: ");
+            int start = Integer.parseInt(scanner.nextLine());
+            int end = Integer.parseInt(scanner.nextLine());
+
+            System.out.println("Enter your second coordinates (Enter the x-value and press enter then type the y-value: ");
+            int start2 = Integer.parseInt(scanner.nextLine());
+            int end2 = Integer.parseInt(scanner.nextLine());
+
+            boolean validEntry = scrabbleBoard.placeWord(words, scrabbleBoard.getScrabbleBoard()[start][end], scrabbleBoard.getScrabbleBoard()[start2][end2], currentPlayer);//place the words on the board and if any error, choose an appropriate location
+
+            while(!validEntry){
+                System.out.println("Choose a starting and ending square: ");
+                System.out.println("Enter your first coordinates (Enter the x-value and press enter then type the y-value: ");
+                start = Integer.parseInt(scanner.nextLine());
+                end = Integer.parseInt(scanner.nextLine());
+
+                System.out.println("Enter your second coordinates (Enter the x-value and press enter then type the y-value: ");
+                start2 = Integer.parseInt(scanner.nextLine());
+                end2 = Integer.parseInt(scanner.nextLine());
+                validEntry = scrabbleBoard.placeWord(words, scrabbleBoard.getScrabbleBoard()[start][end], scrabbleBoard.getScrabbleBoard()[start2][end2], currentPlayer);//place the words on the board and if any error, choose an appropriate location
+            }
 
 
+            //Change to the next player and repeat the process again
             playerNumber = (playerNumber + 1) % numbersOfPlayers;
             currentPlayer = players.get(playerNumber);
+
+            if(currentPlayer == players.get(players.size()-1)){
+                System.out.println("Do you wish to continue to the next round? (y/n) ");
+                String response = scanner.nextLine();
+                if(response.toLowerCase()== "y"){//if they all agree to end the game, it will be after the last player. If they want to quit, the player with the control types in 'y' and then the winner is determined
+                    int max = 0;
+                    for(Player player : players){
+                        if (player.getTotalScore() > max){
+                            max = player.getTotalScore();
+                            winner = player;
+                        }
+                        System.out.println(player.getPlayerName() + "'s score: " + player.getTotalScore());//Print each player's score
+                    }
+                    System.out.println("The winner of this round is " + winner.getPlayerName());//Print the winner's name
+                    run = false;//exit the while loop and close
+                }
+            }
         }
 
 
