@@ -7,25 +7,25 @@ A simplified version of the classic word game, Scrabble, built using Java and ja
 A text-based version of Scrabble where players use a keyboard to play the game via a console.
 
 ### Authors
-#### Ese Iyamu:
+#### Ese Iyamu
 - Created the Player class.
 - Worked on user manual aspect of documentation.
 - Added Java Doc comments to classes and methods.
 
 
-#### Oyindamola Taiwo-Olupeka:
+#### Oyindamola Taiwo-Olupeka
 - Worked on the ScrabbleBoard and Square classes.
 - Wrote design decision document.
 - Added Java Doc comments to classes and methods.
 
 
-#### Tomisin Ajayi:
+#### Tomisin Ajayi
 - Worked on the ScrabbleGame class.
 - Created UML class and sequence diagrams.
 - Added Java Doc comments to classes and methods.
 
 
-#### Edidiong Okon:
+#### Edidiong Okon
 - Worked on the Tile and TileRack classes.
 - Wrote the README file.
 - Added Java Doc comments to classes and methods.
