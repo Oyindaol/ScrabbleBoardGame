@@ -1,7 +1,8 @@
 /**
  * Square class that holds information of each square on the ScrabbleBoard
  *
- * @author Oyindamola Taiwo-Olupeka 101155729
+ * @author Oyindamola Taiwo-Olupeka (101155729)
+ * @version October 25, 2022
  */
 public class Square {
     private Tile tile; //should hold the character on the tile and the score.
