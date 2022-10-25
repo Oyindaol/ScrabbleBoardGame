@@ -1,7 +1,7 @@
 /**
  * Square class that holds information of each square on the ScrabbleBoard
- * @author Oyindamola Taiwo-Olupeka 101155729
  *
+ * @author Oyindamola Taiwo-Olupeka 101155729
  */
 public class Square {
     private Tile tile; //should hold the character on the tile and the score.
@@ -68,7 +68,6 @@ public class Square {
     /**
      * playTile method to place a tile on the square.
      *
-     *
      * @param tile
      */
     public void playTile(Tile tile){
@@ -86,27 +85,64 @@ public class Square {
         }
     }
 
+    /**
+     * A mutator method to set the Tile.
+     *
+     * @param tile
+     */
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
+    /**
+     * A mutator method to make the square empty.
+     *
+     * @param value
+     */
+    public void setEmpty(Boolean value){
+        this.empty = value;
+    }
+
+    /**
+     * Method that returns the updated score of a tile placed on a double letter square.
+     *
+     * @param tile
+     * @return tile.score * 2
+     */
     public int getDoubleLetterSquare(Tile tile){ //should pass in a reference to the tile score for Tile class
         return tile.score * 2;
-    } // score var can be changed
+    }
 
+    /**
+     * Method that returns the updated score of a tile placed on a triple letter square.
+     *
+     * @param tile
+     * @return tile.score * 3;
+     */
     public int getTripleLetterSquare(Tile tile){//should pass in a reference to the tile score
         return tile.score * 3;
     }
 
+    /**
+     * Method that returns the updated score of a word placed on a double word square.
+     * Incomplete.
+     *
+     * @return
+     */
     public int getDoubleWordSquare() { // needs work
         return doubleWordSquare * 2;
     }
 
+    /**
+     * Method that returns the updated score of a word placed on a triple word square.
+     * Incomplete.
+     *
+     * @return
+     */
     public int getTripleWordSquare(){ //needs work
         return tripleWordSquare * 3;
     }
 
-    public void setTile(Tile tile) {
-        this.tile = tile;
-    }
-    public void setEmpty(Boolean value){
-        this.empty = value;
-    }
+
 
 }

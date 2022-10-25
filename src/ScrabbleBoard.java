@@ -20,6 +20,11 @@ public class ScrabbleBoard {
     private int wordScore;
     private Tile tile;
 
+    /**
+     * ScrabbleBoard constructor method to initialize the ScrabbleBoard.
+     *
+     * @throws FileNotFoundException
+     */
     public ScrabbleBoard() throws FileNotFoundException {
 
         scrabbleBoard = new Square[BOARD_DIMENSION][BOARD_DIMENSION];
@@ -39,22 +44,48 @@ public class ScrabbleBoard {
         wordScore = 0;
     }
 
+    /**
+     * Accessor method to return scrabble board.
+     *
+     * @return scrabbleBoard
+     */
     public Square[][] getScrabbleBoard() {
         return scrabbleBoard;
     }
 
+    /**
+     * Accessor method to return the starSquare indicating the starting point of the game.
+     *
+     * @return starSquare
+     */
     public Square getStarSquare() {
         return starSquare;
     }
 
+    /**
+     * Accessor method to return an arraylist of filled squares(the indexes).
+     *
+     * @return filledSquares
+     */
     public ArrayList<Square> getFilledSquares() {
         return filledSquares;
     }
 
+    /**
+     * Accessor method to return an arraylist of words played.
+     *
+     * @return wordsPlayed
+     */
     public ArrayList<String> getWordsPlayed() {
         return wordsPlayed;
     }
 
+    /**
+     * A method to read the words from the ScrabbleWords text file and verify if the word is legal.
+     *
+     * @return words
+     * @throws FileNotFoundException
+     */
     public ArrayList<String> readWords() throws FileNotFoundException {
         ArrayList<String> words = new ArrayList<>();
         File acceptedWords = new File("ScrabbleWords.txt");
@@ -67,6 +98,15 @@ public class ScrabbleBoard {
         return words;
     }
 
+    /**
+     * A method to check if the space a player is trying to play on on empty.
+     *
+     * @param words
+     * @param s1
+     * @param s2
+     * @return true,
+     * @return false,
+     */
     public boolean checkSpaceEmpty(ArrayList<Tile> words, Square s1, Square s2){
         int x1 = s1.getRowNumber();
         int y1 = s1.getColumnNumber();
@@ -98,6 +138,12 @@ public class ScrabbleBoard {
         return true;
     }
 
+    /**
+     * A method to make a possible word from the Tiles the Player has on their TileRack.
+     *
+     * @param words
+     * @return newWord
+     */
     public String wordInArray(ArrayList<Tile> words){
         String newWord = "";
         for(int i=0; i<words.size(); i++){
@@ -106,11 +152,27 @@ public class ScrabbleBoard {
         return newWord;
     }
 
+    /**
+     * A method to place a tile on a square.
+     *
+     * @param tile
+     * @param square
+     */
     public void placeTile(Tile tile,Square square){
         square.setTile(tile);
         square.setEmpty(false);
     }
 
+    /**
+     * A method to place the possible word horizontally.
+     *
+     * @param words
+     * @param start
+     * @param end
+     * @param currentPlayer
+     * @param temp
+     * @param constant
+     */
     public void placeHorizontal(ArrayList<Tile> words, Square start, Square end, Player currentPlayer, int temp, int constant){
         int score = 0;
         for (int i = 0; i < words.size(); i++) {
@@ -125,6 +187,16 @@ public class ScrabbleBoard {
         }
     }
 
+    /**
+     * A method to place the possible word vertically.
+     *
+     * @param words
+     * @param start
+     * @param end
+     * @param currentPlayer
+     * @param temp
+     * @param constant
+     */
     public void placeVertically(ArrayList<Tile> words, Square start, Square end, Player currentPlayer, int temp, int constant){
         int score = 0;
         for (int i = 0; i < words.size(); i++) {
@@ -140,6 +212,15 @@ public class ScrabbleBoard {
         }
     }
 
+    /**
+     * A method to place a word.
+     *
+     * @param words
+     * @param start
+     * @param end
+     * @param currentPlayer
+     * @return
+     */
     public boolean placeWord(ArrayList<Tile> words, Square start, Square end, Player currentPlayer){
         int x1 = start.getRowNumber();
         int y1 = start.getColumnNumber();
@@ -177,16 +258,34 @@ public class ScrabbleBoard {
         return false;
     }
 
-
-
-
-    public String toString(){
-        StringBuilder board;
-        int length = BOARD_DIMENSION * BOARD_DIMENSION;
-        for(int i=0; i<length; i++){
-
+    /**
+     * A method to display the ScrabbleBoard.
+     *
+     * @return str
+     */
+    public String displayBoard() {
+        String str = "";
+        for (int row = 0; row < BOARD_DIMENSION; row++) {
+            for (int column = 0; column < BOARD_DIMENSION; column++) {
+                str += scrabbleBoard[row][column];
+            }
+            str += "\n";
         }
-
-        return "";
+        return str;
     }
+
+
+
+//    public String toString(){
+//        StringBuilder board;
+//        int length = BOARD_DIMENSION * BOARD_DIMENSION;
+//        for(int i=0; i<length; i++){
+//
+//        }
+//        return "";
+//    }
+
+
+
 }
+
