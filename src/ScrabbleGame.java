@@ -188,7 +188,7 @@ public class ScrabbleGame {
     }
 
     /**
-     * Starts the Scrabble game.
+     * Starts a new Scrabble game.
      * @param args
      */
     public static void main(String[] args) {
