@@ -1,5 +1,13 @@
 import java.util.*;
 
+/**
+ * The ScrabbleGame class is the main class of this Scrabble game. It starts the game and
+ * keeps track of the information of 2-4 players. Determines the winner from the highest
+ * score between the players.
+ * @author Oluwatomisin Ajayi (101189490)
+ * @version October 25, 2022
+ */
+
 public class ScrabbleGame {
 
     public static final int SIZE = 14;
@@ -13,10 +21,14 @@ public class ScrabbleGame {
     private boolean gameStarted;
     private boolean gameOver;
 
-    private char[][] grid;
+    //private char[][] grid;
     //private HashMap<String, Integer> letterSet;
-    private List<Tile> tileValueList;
+    //private List<Tile> tileValueList;
 
+    /**
+     * Constructor for the class ScrabbleGame. Initializes the players, the tile letters and
+     * the scores.
+     */
     public ScrabbleGame() {
         players = new ArrayList<>();
         letters = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L","M",
@@ -44,10 +56,20 @@ public class ScrabbleGame {
 //        throw new IllegalArgumentException("'" + letter + "' is not valid");
 //    }
 
+    /**
+     * Adds a player to the current arraylist of players.
+     * @param player
+     */
     private void addPlayer(Player player) {
         players.add(player);
     }
 
+    /**
+     * Checks if ArrayList, characters, contains a specified string in the array of strings.
+     * @param array
+     * @param characters
+     * @return
+     */
     private boolean contains(String[] array, ArrayList<String> characters){
         for (int i=0; i<characters.size(); i++){
             if (!characters.contains(array[i])){
@@ -57,6 +79,9 @@ public class ScrabbleGame {
         return true;
     }
 
+    /**
+     * Play routine. Loops until the game ends.
+     */
     private void play() {
         boolean run = true;
         Scanner scanner = new Scanner(System.in);
@@ -162,6 +187,10 @@ public class ScrabbleGame {
 
     }
 
+    /**
+     * Starts the Scrabble game.
+     * @param args
+     */
     public static void main(String[] args) {
         ScrabbleGame scrabbleGame = new ScrabbleGame();
         scrabbleGame.play();
