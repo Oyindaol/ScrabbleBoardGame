@@ -4,7 +4,7 @@ import java.util.*;
  * initializes the players scores to 0.
  *
  * @author: Iyamu C. Ese
- * @version October 25th, 2022
+ * @version October 25th, 2022.
  */
 public class Player {
 
