@@ -1,38 +1,25 @@
 import java.util.*;
 /**
- * Class player handles all about a player. the constructor takes in the players name,
- * initializes the players scores to 0 and their rack with random letters
+ * Class player handles all about a player. The constructor takes in the players name,
+ * initializes the players scores to 0.
  *
  * @author: Iyamu C. Ese
+ * @version October 25th, 2022.
  */
 public class Player {
-    //private ScrabbleGame game;
-    // private TileRack tileRack;
-    // private tile tile;
+
 
     private String playerName;
     private int lastRoundScore, totalScore;
-    //private char gameLetters;
-    Random rand = new Random();
     ArrayList<Tile> playerRack = new ArrayList<>(7);
     /**
      * Constructor for the class Player
      * @param name  name of player
-     * //@param lastRoundScore  Score for round just played
-     * //@param totalScore  Total game score
-     * // @param playerRack  Players letters
      */
     public Player(String name){
         playerName = name;
         lastRoundScore = 0;
         totalScore = 0;
-
-        //Initialize players with random letters
-//        for (int i = 0; i < playerRack.length; i++){
-//            playerRack[i] = (char)(rand.nextInt(27) + 'A');
-//            System.out.println(playerRack[i]);
-//        }
-
     }
 
     /**
@@ -59,11 +46,18 @@ public class Player {
         return totalScore;
     }
 
-
+    /**
+     * getRack gets players tiles rack
+     * @return playerRack
+     */
     public ArrayList<Tile> getRack() {
         return playerRack;
     }
 
+    /**
+     * setScores keeps track of each player's score.
+     * @param score
+     */
     public void setScores(int score) {
         this.lastRoundScore = score;
         this.totalScore += score;
