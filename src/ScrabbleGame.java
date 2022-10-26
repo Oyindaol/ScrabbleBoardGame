@@ -1,3 +1,13 @@
+/**
+ * Class ScrabbleGame is the main class of the board game Scrabble.
+ * For this milestone (Milestone 1), the game would be played via keyboard.
+ * To play game, players would have to key in the word they want to play with
+ * the given letters they have and where on they board they want to place the letters.
+ *
+ * For the game to start, just run the class ScrabbleGame.
+ *
+ */
+
 import java.util.*;
 
 public class ScrabbleGame {
@@ -17,6 +27,9 @@ public class ScrabbleGame {
     //private HashMap<String, Integer> letterSet;
     private List<Tile> tileValueList;
 
+    /**
+     * Constructor for ScrabbleGame, creates the game.
+     */
     public ScrabbleGame() {
         players = new ArrayList<>();
         letters = new ArrayList<>(Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L","M",
@@ -44,10 +57,20 @@ public class ScrabbleGame {
 //        throw new IllegalArgumentException("'" + letter + "' is not valid");
 //    }
 
+    /**
+     * method addPlayer adds a player to game
+     * @param player
+     */
     private void addPlayer(Player player) {
         players.add(player);
     }
 
+    /**
+     * method contains if the letters played by user in/from their rack.
+     * @param array
+     * @param characters
+     * @return
+     */
     private boolean contains(String[] array, ArrayList<String> characters){
         for (int i=0; i<characters.size(); i++){
             if (!characters.contains(array[i])){
@@ -57,6 +80,9 @@ public class ScrabbleGame {
         return true;
     }
 
+    /**
+     * method play starts the game routine, and it runs till the game is ended
+     */
     private void play() {
         boolean run = true;
         Scanner scanner = new Scanner(System.in);
@@ -162,6 +188,10 @@ public class ScrabbleGame {
 
     }
 
+    /**
+     * main method used to instantiate a new game object to play the game
+     * @param args
+     */
     public static void main(String[] args) {
         ScrabbleGame scrabbleGame = new ScrabbleGame();
         scrabbleGame.play();
