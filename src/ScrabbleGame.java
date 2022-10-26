@@ -1,12 +1,14 @@
-import java.util.*;
-
 /**
- * The ScrabbleGame class is the main class of this Scrabble game. It starts the game and
- * keeps track of the information of 2-4 players. Determines the winner from the highest
- * score between the players.
- * @author Oluwatomisin Ajayi (101189490)
- * @version October 25, 2022
+ * Class ScrabbleGame is the main class of the board game Scrabble.
+ * For this milestone (Milestone 1), the game would be played via keyboard.
+ * To play game, players would have to key in the word they want to play with
+ * the given letters they have and where on they board they want to place the letters.
+ *
+ * For the game to start, just run the class ScrabbleGame.
+ *
  */
+
+import java.util.*;
 
 public class ScrabbleGame {
 
@@ -21,13 +23,12 @@ public class ScrabbleGame {
     private boolean gameStarted;
     private boolean gameOver;
 
-    //private char[][] grid;
+    private char[][] grid;
     //private HashMap<String, Integer> letterSet;
-    //private List<Tile> tileValueList;
+    private List<Tile> tileValueList;
 
     /**
-     * Constructor for the class ScrabbleGame. Initializes the players, the tile letters and
-     * the scores.
+     * Constructor for ScrabbleGame, creates the game.
      */
     public ScrabbleGame() {
         players = new ArrayList<>();
@@ -57,7 +58,7 @@ public class ScrabbleGame {
 //    }
 
     /**
-     * Adds a player to the current arraylist of players.
+     * method addPlayer adds a player to game
      * @param player
      */
     private void addPlayer(Player player) {
@@ -65,7 +66,7 @@ public class ScrabbleGame {
     }
 
     /**
-     * Checks if ArrayList, characters, contains a specified string in the array of strings.
+     * method contains if the letters played by user in/from their rack.
      * @param array
      * @param characters
      * @return
@@ -80,7 +81,7 @@ public class ScrabbleGame {
     }
 
     /**
-     * Play routine. Loops until the game ends.
+     * method play starts the game routine, and it runs till the game is ended
      */
     private void play() {
         boolean run = true;
@@ -188,7 +189,7 @@ public class ScrabbleGame {
     }
 
     /**
-     * Starts the Scrabble game.
+     * main method used to instantiate a new game object to play the game
      * @param args
      */
     public static void main(String[] args) {
