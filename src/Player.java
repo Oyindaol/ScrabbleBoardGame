@@ -3,7 +3,7 @@ import java.util.*;
  * Class player handles all about a player. The constructor takes in the players name,
  * initializes the players scores to 0.
  *
- * @author: Iyamu C. Ese
+ * @author: Iyamu C. Ese (101081699)
  * @version October 25th, 2022.
  */
 public class Player {

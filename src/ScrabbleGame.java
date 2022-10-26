@@ -194,7 +194,8 @@ public class ScrabbleGame {
     }
 
     /**
-     * main method used to instantiate a new game object to play the game
+     * main method used to instantiate a new ScrabbleGame object to play the game
+     *
      * @param args
      */
     public static void main(String[] args) {

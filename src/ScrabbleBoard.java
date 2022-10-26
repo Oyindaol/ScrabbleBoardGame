@@ -4,9 +4,9 @@ import java.util.Scanner;
 
 /**
  * ScrabbleBoard class which is a representation of the scrabble Board
+ *
  * @author Oyindamola Taiwo-Olupeka (101155729)
  * @version October 25, 2022
- *
  */
 public class ScrabbleBoard {
 
