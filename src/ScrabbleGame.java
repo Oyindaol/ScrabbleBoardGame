@@ -3,8 +3,13 @@
  * For this milestone (Milestone 1), the game would be played via keyboard.
  * To play game, players would have to key in the word they want to play with
  * the given letters they have and where on they board they want to place the letters.
+ * The game keeps track of the information of 2-4 players. Determines the winner from the highest
+ * score between the players.
  *
  * For the game to start, just run the class ScrabbleGame.
+ *
+ * @author Oluwatomisin Ajayi (101189490)
+ * @version October 25, 2022
  *
  */
 
