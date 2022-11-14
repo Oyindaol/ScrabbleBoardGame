@@ -4,7 +4,6 @@
  *
  * @author Oyindamola Taiwo-Olupeka (101155729)
  * @version November 13, 2022
- *
  */
 import java.awt.*;
 import javax.swing.*;
