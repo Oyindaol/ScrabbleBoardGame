@@ -13,7 +13,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-
 public class ScrabbleBoardFrame extends JPanel {
     private final ScrabbleModel scrabbleModel = ScrabbleModel.getInstance();
 
