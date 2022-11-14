@@ -13,8 +13,6 @@
 import java.io.*;
 import java.util.*;
 
-//	ScrabbleModel class (implemented as a Singleton) which contains all information pertaining to the game.
-//	Player information is stored in a private player class within ScrabbleModel, handled by ScrabbleModel methods.
 
 
 public class ScrabbleModel {
