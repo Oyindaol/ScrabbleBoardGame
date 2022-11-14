@@ -14,7 +14,6 @@ import java.io.*;
 import java.util.*;
 
 
-
 public class ScrabbleModel {
     private static ScrabbleModel instance = null;
     private final char[][] defaultBoard;
