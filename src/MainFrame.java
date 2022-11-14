@@ -31,8 +31,11 @@ public class MainFrame extends JFrame {
         super.setVisible(true);
         super.setBackground(Color.BLACK);
     }
+
     public static void main(String[] args) {
         new MainFrame();
     }
+
+}
 
 }
