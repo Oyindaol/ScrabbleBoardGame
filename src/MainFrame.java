@@ -6,12 +6,10 @@
  * @version November 13, 2022
  *
  */
-
 import java.awt.*;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
-
 
     public MainFrame() {
         super("ScrabbleModel Game - Group 17");
@@ -29,12 +27,10 @@ public class MainFrame extends JFrame {
         super.setMinimumSize(super.getSize());
         super.setResizable(false);
         super.setVisible(true);
-        super.setBackground(Color.BLACK);
     }
 
     public static void main(String[] args) {
+        //MainFrame frame =
         new MainFrame();
-
     }
-
 }
