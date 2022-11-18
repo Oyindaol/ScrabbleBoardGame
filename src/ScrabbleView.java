@@ -5,6 +5,5 @@
  * @version November 13, 2022
  */
 public interface ScrabbleView {
-    //void update(ScrabbleModel e);
-    void update(ScrabbleModel model, ScrabbleBoardFrame board, int i, int j, boolean turn);
+    void update(ScrabbleModel model, ScrabbleBoardFrame board, int row, int col, boolean turn);
 }

@@ -94,7 +94,7 @@ public class ScrabbleModel {
                 'V','V','W','W','X','Y','Y', 'Z',' ',' '};
 
 
-        // values of each character
+        //Mapping each character to their points
         tiles = new HashMap<>();
         tiles.put('A', 1);
         tiles.put('B', 3);
@@ -148,13 +148,31 @@ public class ScrabbleModel {
     }
 
     /**
-     * Adds the views of the model to an arraylist of views
+     * Adds a view to the Scrabble game
      *
      * @param v
      */
     public void addScrabbleView(ScrabbleView v){
         views.add(v);
     }
+
+    /**
+     * Removes a view from the Scrabble game
+     * @param v
+     */
+    public void removeScrabbleView(ScrabbleView v){
+        views.remove(v);
+    }
+
+    /**
+     * Returns the Scrabble views
+     *
+     * @return views
+     */
+    public List<ScrabbleView> getScrabbleViews(){
+        return views;
+    }
+
 
     /**
      * Getter method to return the tile character
@@ -321,11 +339,11 @@ public class ScrabbleModel {
 
     /**
      * Method to add score to current player after each play
-     * @param score
+     * @param points
      */
-    public void addScore(int score) {
-        int tempScore = players.get(turnList.get(turnIndex)).getPlayerScore();
-        tempScore += score;
+    public void addScore(int points) {
+
+        players.get(turnList.get(turnIndex)).playerScore += points;
     }
 
     /**
