@@ -10,12 +10,11 @@ import java.util.Random;
 
 public class Player {
     private final String playerName;
-    private int playerScore;
+    public int playerScore;
     private ArrayList<Character> playerTiles;
     private ArrayList<Character> usedTiles;
 
 
-    // CONSTRUCTOR
     public Player(String name) {
         if(name.length() == 0)
             name = "Player X";
@@ -26,28 +25,45 @@ public class Player {
         usedTiles = new ArrayList<>();
     }
 
-    // GETTERS
-    // only really used for turn order
+    /**
+     * Getter method to return Player's first tile
+     * @return playerTiles.get(0)
+     */
     public char getFirstTile() {
         return playerTiles.get(0);
     }
 
+    /**
+     * Getter method to return the players rack
+     *
+     * @return playerTiles
+     */
     public ArrayList<Character> getRack() {
         return playerTiles;
     }
 
-
+    /**
+     * Getter method to return the players name
+     *
+     * @return playerName
+     */
     public String getPlayerName() {
         return playerName;
     }
 
+    /**
+     * Getter method to return the players score
+     *
+     * @return playerScore
+     */
     public int getPlayerScore() {
         return playerScore;
     }
 
-    // SETTERS
-    // assigns new tiles to player no matter if empty or partly filled
-    // stops when 7 tiles is reached or no more tiles available
+    /**
+     * Setter method to fill the rack to 7 tiles at the beginning of each turn
+     * disables when there are no more tiles in the bag
+     */
     public void fillRack() {
         Random r = new Random();
 
@@ -61,6 +77,10 @@ public class Player {
         usedTiles.clear();
         usedTiles.addAll(playerTiles);
     }
+
+    /**
+     * Setter method to clear the rack.
+     */
     public void resetRack() {
         playerTiles.clear();
         playerTiles.addAll(usedTiles);
