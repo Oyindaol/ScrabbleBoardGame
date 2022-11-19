@@ -1,17 +1,24 @@
+/**
+ * This class is the Graphical User Interface(GUI) which has an instance of the ScrabbleModel class
+ * and is how PLayers are meant to interact with board.
+ *Contains nested classes to build the frame and its panels
+ *
+ * @author Oyindamola Taiwo-Olupeka (101155729)
+ * @version
+ */
+
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
-/**This is the upper layer of the ScrabbleModel game interface, which contains all relevant components within it.
-It holds a single ScrabbleModel object which maintains the current state of the game, including players and board.
-Inner classes will reference the ScrabbleModel object periodically as players make modifications to the GUI.
- **/
+/**
+ * Main panel where all the nested panels are placed on
+ */
 public class ScrabbleBoardFrame extends JPanel {
     private final ScrabbleModel scrabbleModel = ScrabbleModel.getInstance();
 
-    // made these member data because they need to be directly accessible
     private final BoardPanel boardPanel;
     private final RackPanel rackPanel;
     private final ButtonPanel buttonPanel;
@@ -40,8 +47,10 @@ public class ScrabbleBoardFrame extends JPanel {
         super.setBackground(Color.GRAY);
     }
 
-    // Inner class ScorePanel contains the distribution of letters and current player scores.
-    // This panel is displayed on the left-hand side of the ScrabbleBoardFrame panel.
+    /**
+     * Nested ScorePanel class to create the score panel and the scores associated to each tile
+     * Left side of the ScrabbleBoardFrame panel.
+     */
     public class ScorePanel extends JPanel {
 
         private JLabel scores;
@@ -71,8 +80,8 @@ public class ScrabbleBoardFrame extends JPanel {
             removeAll();
             super.add(infoBox, BorderLayout.SOUTH);
             String info = "<html><b>Scores</b><br/><pre>";
-            for(int row = 0; row < scrabbleModel.getPlayerCount(); row++) {
-                info += scrabbleModel.getPlayerName(row) + ": " + scrabbleModel.getPlayerScore(row)+"<br/>";
+            for(int i = 0; i < scrabbleModel.getPlayerCount(); i++) {
+                info += scrabbleModel.getPlayerName(i) + ": " + scrabbleModel.getPlayerScore(i)+"<br/>";
             }
             info += "</pre></html>";
             scores = new JLabel(info, SwingConstants.CENTER);
@@ -82,8 +91,11 @@ public class ScrabbleBoardFrame extends JPanel {
         }
     }
 
-    // Inner class ButtonPanel contains the end-turn button and current player information.
-    // This panel is displayed at the top of the ScrabbleBoardFrame panel.
+    /**
+     * Nested ButtonPanel class that the buttons required the game flow are placed
+     * Also lets us know which players turn it is
+     * Top of the ScrabbleBoardFrame panel.
+     */
     public class ButtonPanel extends JPanel {
 
         private JLabel playerName;
@@ -239,8 +251,10 @@ public class ScrabbleBoardFrame extends JPanel {
         }
     }
 
-    // Inner class BoardPanel contains the grid corresponding to the ScrabbleModel object's boardState.
-    // This panel is displayed in the center of the ScrabbleBoardFrame panel.
+    /**
+     * Nested BoardPanel class that contains the default grid for the game
+     * Centre of the ScrabbleBoardFrame panel.
+     */
     public class BoardPanel extends JPanel {
 
         private JLabel[][] board;
@@ -393,6 +407,10 @@ public class ScrabbleBoardFrame extends JPanel {
         }
     }
 
+    /**
+     * Nested RackPanel class that holds the players racks
+     * Bottom of the ScrabbleBoardFrame panel.
+     */
     public class RackPanel extends JPanel{
         private JLabel currentPiece;
         private ArrayList<Character> rack;
