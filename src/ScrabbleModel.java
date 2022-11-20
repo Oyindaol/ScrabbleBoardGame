@@ -16,9 +16,7 @@ import java.util.*;
 
 public class ScrabbleModel {
     private static ScrabbleModel instance = null;
-    private final char[][] defaultBoard;
-    private final char[][] newBoard;
-    private final char[][] currentBoard;
+    private final ScrabbleBoard scrabbleBoard;
 
     private final TileBag newTileBag;
     private static ArrayList<Character> characters;
@@ -39,47 +37,7 @@ public class ScrabbleModel {
      * Manages the views
      */
     public ScrabbleModel() {
-        //Default state of a scrabble with bonus values hard-coded
-        //0 = blank
-        //1 = starting point
-        //2 = double letter
-        //3 = triple letter
-        //4 = double word,
-        //5 = triple word
-        //initializes the default board according to the integers
-        defaultBoard = new char[][] {
-                {5,0,0,2,0,0,0,5,0,0,0,2,0,0,5},
-                {0,4,0,0,0,3,0,0,0,3,0,0,0,4,0},
-                {0,0,4,0,0,0,2,0,2,0,0,0,4,0,0},
-                {2,0,0,4,0,0,0,2,0,0,0,4,0,0,2},
-                {0,0,0,0,4,0,0,0,0,0,4,0,0,0,0},
-                {0,3,0,0,0,3,0,0,0,3,0,0,0,3,0},
-                {0,0,2,0,0,0,2,0,2,0,0,0,2,0,0},
-                {5,0,0,2,0,0,0,1,0,0,0,2,0,0,5},
-                {0,0,2,0,0,0,2,0,2,0,0,0,2,0,0},
-                {0,3,0,0,0,3,0,0,0,3,0,0,0,3,0},
-                {0,0,0,0,4,0,0,0,0,0,4,0,0,0,0},
-                {2,0,0,4,0,0,0,2,0,0,0,4,0,0,2},
-                {0,0,4,0,0,0,2,0,2,0,0,0,4,0,0},
-                {0,4,0,0,0,3,0,0,0,3,0,0,0,4,0},
-                {5,0,0,2,0,0,0,5,0,0,0,2,0,0,5}
-        };
-
-        //active scrabble board in the game
-        currentBoard = new char[15][15];
-        for(int row = 0; row < defaultBoard.length; row++) {
-            for (int col = 0; col < defaultBoard.length; col++) {
-                currentBoard[row][col] = defaultBoard[row][col];
-            }
-        }
-
-        //this will initialize a new board when you start a new game
-        newBoard = new char[15][15];
-        for(int row = 0; row < defaultBoard.length; row++) {
-            for (int col = 0; col < defaultBoard.length; col++) {
-                newBoard[row][col] = defaultBoard[row][col];
-            }
-        }
+        scrabbleBoard = new ScrabbleBoard();
 
         newTileBag = new TileBag();
 
@@ -182,7 +140,7 @@ public class ScrabbleModel {
      * @return defaultBoard[row][col]
      */
     public char getSquare(int row, int col) {
-        return defaultBoard[row][col];
+        return scrabbleBoard.defaultBoard[row][col];
     }
 
     /**
@@ -267,7 +225,7 @@ public class ScrabbleModel {
      * @param col
      */
     public void playTile(char letter, int row, int col) {
-        defaultBoard[row][col] = letter;
+        scrabbleBoard.defaultBoard[row][col] = letter;
     }
 
     /**
@@ -278,7 +236,7 @@ public class ScrabbleModel {
      * @return
      */
     public int calculateScore(char c, int row, int col) {
-        switch (currentBoard[row][col]) {
+        switch (scrabbleBoard.currentBoard[row][col]) {
             case 1: //start of the game and also double word bonus
                 isDoubleWord = true;
                 return newTileBag.tiles.get(Character.toUpperCase(c));
@@ -355,8 +313,8 @@ public class ScrabbleModel {
 
         // move backwards to start of word, capturing all letters
         while(isLetter(--row, col)) {
-            builder.append(defaultBoard[row][col]);
-            scoreTotal += calculateScore(defaultBoard[row][col], row, col);
+            builder.append(scrabbleBoard.defaultBoard[row][col]);
+            scoreTotal += calculateScore(scrabbleBoard.defaultBoard[row][col], row, col);
         }
 
         if(verifyWord(builder.reverse().toString())) {
@@ -393,8 +351,8 @@ public class ScrabbleModel {
 
         // move vertically to start of word, capturing all letters
         while(isLetter(row, --col)) {
-            builder.append(defaultBoard[row][col]);
-            scoreTotal += calculateScore(defaultBoard[row][col], row, col);
+            builder.append(scrabbleBoard.defaultBoard[row][col]);
+            scoreTotal += calculateScore(scrabbleBoard.defaultBoard[row][col], row, col);
         }
 
         if(verifyWord(builder.reverse().toString())) {
@@ -514,7 +472,7 @@ public class ScrabbleModel {
     public boolean isLetter(int row, int col) {
         boolean returnValue;
         try {
-            returnValue = Character.isLetter(defaultBoard[row][col]);
+            returnValue = Character.isLetter(scrabbleBoard.defaultBoard[row][col]);
             return returnValue;
         } catch (IndexOutOfBoundsException e) {
             return false;
@@ -528,9 +486,9 @@ public class ScrabbleModel {
         if(turn == 1) {
             isFirstPlay = true;
         }
-        for(int row = 0; row < defaultBoard.length; row++) {
-            for (int col = 0; col < defaultBoard.length; col++) {
-                defaultBoard[row][col] = newBoard[row][col];
+        for(int row = 0; row < scrabbleBoard.defaultBoard.length; row++) {
+            for (int col = 0; col < scrabbleBoard.defaultBoard.length; col++) {
+                scrabbleBoard.defaultBoard[row][col] = scrabbleBoard.newBoard[row][col];
             }
         }
     }
@@ -540,9 +498,9 @@ public class ScrabbleModel {
      */
     public void updateState() {
         turn++;
-        for(int row = 0; row < defaultBoard.length; row++) {
-            for (int col = 0; col < defaultBoard.length; col++) {
-                newBoard[row][col] = defaultBoard[row][col];
+        for(int row = 0; row < scrabbleBoard.defaultBoard.length; row++) {
+            for (int col = 0; col < scrabbleBoard.defaultBoard.length; col++) {
+                scrabbleBoard.newBoard[row][col] = scrabbleBoard.defaultBoard[row][col];
             }
         }
     }
