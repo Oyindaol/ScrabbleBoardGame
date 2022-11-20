@@ -20,7 +20,6 @@ public class ScrabbleModel {
     private final char[][] newBoard;
     private final char[][] currentBoard;
 
-    private Player player;
     private final char[] tileBag;
     private final Map<Character, Integer> tiles;
     private static ArrayList<Character> characters;
