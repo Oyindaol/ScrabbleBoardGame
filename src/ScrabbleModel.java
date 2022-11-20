@@ -91,7 +91,7 @@ public class ScrabbleModel {
                 'J','K','L','L','L','L','M','M','N','N','N','N','N','N','O',
                 'O','O','O','O','O','O','O','P','P','Q','R','R','R','R','R',
                 'R','S','S','S','S','T','T','T','T','T','T','U','U','U','U',
-                'V','V','W','W','X','Y','Y', 'Z',' ',' '};
+                'V','V','W','W','X','Y','Y','Z',' ',' '};
 
 
         //Mapping each character to their points
@@ -201,14 +201,14 @@ public class ScrabbleModel {
     public ArrayList<Integer> getWinners() {
         int index = 0;
         ArrayList<Integer> winningPlayer = new ArrayList<>();
-        for(int row = 1; row < players.size(); row++) {
-            if(players.get(row).getPlayerScore() >= players.get(index).getPlayerScore()) {
-                index = row;
+        for(int i = 1; i < players.size(); i++) {
+            if(players.get(i).getPlayerScore() >= players.get(index).getPlayerScore()) {
+                index = i;
             }
         }
-        for(int row = 0; row < players.size(); row++) {
-            if(players.get(row).getPlayerScore() == players.get(index).getPlayerScore()) {
-                winningPlayer.add(row);
+        for(int i = 0; i < players.size(); i++) {
+            if(players.get(i).getPlayerScore() == players.get(index).getPlayerScore()) {
+                winningPlayer.add(i);
             }
         }
         return winningPlayer;
@@ -292,9 +292,9 @@ public class ScrabbleModel {
     public void removePlayerTile(char c) {
         ArrayList<Character> list = players.get(turnList.get(turnIndex)).getRack();
 
-        for(int row = 0; row < list.size(); row++) {
-            if(Character.toLowerCase(list.get(row)) == (Character.toLowerCase(c))) {
-                list.remove(row);
+        for(int i = 0; i < list.size(); i++) {
+            if(Character.toLowerCase(list.get(i)) == (Character.toLowerCase(c))) {
+                list.remove(i);
                 break;
             }
         }
@@ -402,7 +402,7 @@ public class ScrabbleModel {
         if(verifyWord(builder.reverse().toString())) {
             completeTurn = true;
             if(isDoubleWord && isTripleWord) {
-                addScore(scoreTotal * 3 * 2);
+                addScore(scoreTotal * 2 * 3);
                 isDoubleWord = false;
                 isTripleWord = false;
             }
@@ -440,7 +440,7 @@ public class ScrabbleModel {
         if(verifyWord(builder.reverse().toString())) {
             completeTurn = true;
             if(isDoubleWord && isTripleWord) {
-                addScore(scoreTotal * 3 * 2);
+                addScore(scoreTotal * 2 * 3);
                 isDoubleWord = false;
                 isTripleWord = false;
             }
