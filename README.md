@@ -5,19 +5,20 @@ A simplified version of the classic word game, Scrabble, built using Java and ja
 A GUI-based version of Scrabble played using a mouse. 
 
 ### Authors
+**(TO BE UPDATED)**
 #### Ese Iyamu
 - Created the Player and Controller class.
-- Worked on the user manual aspect of documentation.
+- Worked on the user manual aspect of updated documentation.
 - Added Java Doc comments to classes and methods.
 
 #### Oyindamola Taiwo-Olupeka
 - Worked on the ScrabbleBoardFrame and MainFrame classes.
-- Wrote the design decision document.
+- Updated the design decision document to reflect the refined design. 
 - Added Java Doc comments to classes and methods.
 
 #### Oluwatomisin Ajayi
 - Worked on the ScrabbleModel class and ScrabbleView interface.
-- Created UML class and sequence diagrams.
+- Created the updated UML class and sequence diagrams.
 - Added Java Doc comments to classes and methods.
 
 #### Edidiong Okon
@@ -25,7 +26,8 @@ A GUI-based version of Scrabble played using a mouse.
 - Wrote the README file.
 - Added Java Doc comments to classes and methods.
 
-#### Known Issues
+### Known Issues
+**(TO BE UPDATED)**
 - The play, clear, pass, and end game buttons are not active currently. We believe the issue is with the controller class. We aim to fix it completely for the next milestone.
 
 ## Future Milestones and Deliverables
@@ -35,27 +37,17 @@ A GUI-based version of Scrabble played using a mouse.
 - Create custom boards with the alternate placement of premium squares using XML or JSON.
 - Update documentation.
 
-
 ## Change Log
-- We removed the Tile and Tile rack class and imputed them into the Model class because they did not have too many responsibilities.
-- We made the ScrabbleGame the the Model class
-- We made ScrabbleBoard the frame class
-- We also added the controller and view classes
- 
- 
- 
+**(TO BE UPDATED)**
 - Add new features and support for blank tiles, premium squares and AI players.
-- Add a method that returns all the possible legal moves and plays the highest scoring move.
-- Refine the program to make it robust and smell-free.
-- Update unit tests.
-- Update UML Diagrams and documentation accordingly.
-
-- Creation of blank tiles, premium squares and AI players.
-- Design of Scrabble move generation algorithm/method.
+- Add a method/algorithm that returns all the possible legal moves and plays the highest scoring move.
+- Updated unit tests.
+- Updated UML Diagrams and documentation to reflect modified design and program.
 
 ## Roadmap
 ### October 23, 2022
 - Text-Based version of the game played with the keyboard.
+- Implementation of the logic of word placement and scoring in Scrabble.
 
 ### November 11, 2022.
 - GUI (View and Controller).
