@@ -22,7 +22,6 @@ public class ScrabbleController implements ActionListener {
 
     public ScrabbleController(ScrabbleModel model){
         this.model = model;
-
     }
 
 
@@ -59,14 +58,14 @@ public class ScrabbleController implements ActionListener {
             boardPanel.reset();
             rackPanel.setRackPanel();
         }
-        else if(e.getActionCommand() == "end game"){
+        else if(e.getActionCommand() == "End Game"){
             if(model.getTurn() > model.getPlayerCount()) {
                 JDialog dialog = new JDialog();
                 JPanel dialogPanel = new JPanel();
                 dialogPanel.setLayout(new BoxLayout(dialogPanel, BoxLayout.Y_AXIS));
 
                 JLabel info = new JLabel();
-                info.setFont(new Font("Helvetica", Font.PLAIN, 24));
+                info.setFont(new Font("TimesRoman", Font.PLAIN, 24));
                 info.setAlignmentX(JLabel.CENTER_ALIGNMENT);
                 info.setSize(100, 50);
                 info.setBorder(new EmptyBorder(10, 40, 10, 40));

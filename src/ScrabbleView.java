@@ -5,5 +5,12 @@
  * @version November 13, 2022
  */
 public interface ScrabbleView {
-    void update(ScrabbleModel model, ScrabbleBoardFrame board, int row, int col, boolean turn);
+
+    void handlePlay();
+
+    void handleClear();
+
+    void handlePass();
+
+    void handleEndGame();
 }

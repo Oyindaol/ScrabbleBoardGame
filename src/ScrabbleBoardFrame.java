@@ -16,7 +16,7 @@ import java.util.*;
 /**
  * Main panel where all the nested panels are placed on
  */
-public class ScrabbleBoardFrame extends JPanel {
+public class ScrabbleBoardFrame extends JPanel implements ScrabbleView {
     private final ScrabbleModel scrabbleModel = ScrabbleModel.getInstance();
 
     private final BoardPanel boardPanel;
@@ -24,7 +24,7 @@ public class ScrabbleBoardFrame extends JPanel {
     private final ButtonPanel buttonPanel;
     private final ScorePanel scorePanel;
 
-    ScrabbleController sc = new ScrabbleController(scrabbleModel);
+    private ScrabbleController sc;
 
 
     public ScrabbleBoardFrame() {
@@ -45,6 +45,10 @@ public class ScrabbleBoardFrame extends JPanel {
         rackPanel.setRackPanel();
         buttonPanel.showCurrentPlayer();
         super.setBackground(Color.GRAY);
+
+        scrabbleModel.addScrabbleView(this);
+        sc = new ScrabbleController(scrabbleModel);
+
     }
 
     /**
@@ -71,7 +75,6 @@ public class ScrabbleBoardFrame extends JPanel {
             super.setBorder(BorderFactory.createCompoundBorder(new MatteBorder(0, 0, 0, 2, Color.BLACK), new EmptyBorder(10, 10, 10, 10)));
             super.add(infoBox, BorderLayout.SOUTH);
             super.setBackground(Color.PINK);
-
             updateScores();
         }
 
@@ -111,7 +114,17 @@ public class ScrabbleBoardFrame extends JPanel {
             clear.setContentAreaFilled(false);
             clear.setOpaque(true);
             clear.setBackground(Color.RED);
-            clear.addActionListener((ActionListener) sc);
+
+            clear.setActionCommand("clear");
+            clear.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    scrabbleModel.resetBoard();
+                    scrabbleModel.resetCurrentPlayer();
+                    boardPanel.reset();
+                    rackPanel.setRackPanel();
+                }
+            });
 
             // Initializing pass Button
             JButton pass = new JButton("pass");
@@ -141,7 +154,6 @@ public class ScrabbleBoardFrame extends JPanel {
             play.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
                     if(scrabbleModel.endTurn()) {
                         scrabbleModel.refillCurrentPlayer();
                         scrabbleModel.nextPlayer();
@@ -221,13 +233,11 @@ public class ScrabbleBoardFrame extends JPanel {
             buttonSection.add(Box.createHorizontalStrut(5));
             buttonSection.add(endGame);
 
-
             // Formatting Panel
             super.setLayout(new BorderLayout());
             super.setBorder(BorderFactory.createCompoundBorder(new MatteBorder(0, 0, 2, 0, Color.BLACK), new EmptyBorder(10, 10, 10, 10)));
             super.add(buttonSection, BorderLayout.LINE_END);
             super.setBackground(Color.PINK);
-
         }
 
         // called whenever a turn is made, updates current player at top
@@ -310,7 +320,7 @@ public class ScrabbleBoardFrame extends JPanel {
                                     dialogPanel.setLayout(new BoxLayout(dialogPanel, BoxLayout.Y_AXIS));
 
                                     JLabel info = new JLabel("<html>Select the letter you would like to replace the "
-                                            + "blank piece with, then press ENTER.</html>");
+                                            + "blank tile with, then press ENTER.</html>");
                                     info.setFont(new Font("Helvetica", Font.PLAIN, 12));
                                     info.setAlignmentX(JLabel.CENTER_ALIGNMENT);
                                     info.setSize(100, 50);
@@ -446,5 +456,26 @@ public class ScrabbleBoardFrame extends JPanel {
         public void resetCurrentPiece() {
             currentPiece = null;
         }
+    }
+
+
+    @Override
+    public void handlePlay() {
+
+    }
+
+    @Override
+    public void handleClear() {
+
+    }
+
+    @Override
+    public void handlePass() {
+
+    }
+
+    @Override
+    public void handleEndGame() {
+
     }
 }
