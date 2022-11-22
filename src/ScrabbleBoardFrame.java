@@ -141,14 +141,6 @@ public class ScrabbleBoardFrame extends JPanel {
             play.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //update current player score
-                    //fill current player hand
-                    //update boardstate
-                    //update board
-                    //change players
-                    //update change hand panel
-                    //update players scores label
-                    //update player turn label
 
                     if(scrabbleModel.endTurn()) {
                         scrabbleModel.refillCurrentPlayer();
@@ -312,7 +304,7 @@ public class ScrabbleBoardFrame extends JPanel {
                         public void mouseClicked(MouseEvent e) {
                             if(rackPanel.getCurrentPiece() != null) {
                                 // Functionality for Blank Pieces
-                                if(rackPanel.getCurrentPiece().getText().charAt(0) == '*') {
+                                if(rackPanel.getCurrentPiece().getText().charAt(0) == ' ') {
                                     JDialog dialog = new JDialog();
                                     JPanel dialogPanel = new JPanel();
                                     dialogPanel.setLayout(new BoxLayout(dialogPanel, BoxLayout.Y_AXIS));

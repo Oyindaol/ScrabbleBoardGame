@@ -45,5 +45,6 @@ public class TileBag {
         tiles.put('X', 8);
         tiles.put('Y', 4);
         tiles.put('Z', 10);
+        tiles.put(' ', 0);
     }
 }
