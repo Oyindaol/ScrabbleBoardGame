@@ -1,8 +1,8 @@
 # Scrabble
 A simplified version of the classic word game, Scrabble, built using Java and java.util packages.
 
-## Milestone 1
-A text-based version of Scrabble where players use a keyboard to play the game via a console.
+## Milestone 3
+A GUI-based version of Scrabble played using a mouse. 
 
 ### Authors
 #### Ese Iyamu
@@ -29,18 +29,6 @@ A text-based version of Scrabble where players use a keyboard to play the game v
 - The play, clear, pass, and end game buttons are not active currently. We believe the issue is with the controller class. We aim to fix it completely for the next milestone.
 
 ## Future Milestones and Deliverables
-### Milestone 2
-- GUI-based version of the Scrabble game.
-- Add a GUI to the current text-based version of the game using GameView and GameController classes.
-- Create unit tests for the Model.
-- Update all UML Diagrams and documentation.
-
-### Milestone 3
-- Add new features and support for blank tiles, premium squares and AI players.
-- Add a method that returns all the possible legal moves and plays the highest scoring move.
-- Refine the program to make it robust and smell-free.
-- Update UML Diagrams and documentation accordingly.
-
 ### Milestone 4
 - Add a multiple-level undo and redo feature.
 - Implement Java Serialization and utilize it to add a save and load feature.
@@ -53,14 +41,27 @@ A text-based version of Scrabble where players use a keyboard to play the game v
 - We made the ScrabbleGame the the Model class
 - We made ScrabbleBoard the frame class
 - We also added the controller and view classes
+ 
+ 
+ 
+- Add new features and support for blank tiles, premium squares and AI players.
+- Add a method that returns all the possible legal moves and plays the highest scoring move.
+- Refine the program to make it robust and smell-free.
+- Update unit tests.
+- Update UML Diagrams and documentation accordingly.
 
+- Creation of blank tiles, premium squares and AI players.
+- Design of Scrabble move generation algorithm/method.
 
 ## Roadmap
-### November 11, 2022
+### October 23, 2022
+- Text-Based version of the game played with the keyboard.
+
+### November 11, 2022.
 - GUI (View and Controller).
 - Unit Testing for the Model.
 
-### November 21, 2022
+### November 21, 2022.
 - Creation of blank tiles, premium squares and AI players.
 - Design of Scrabble move generation algorithm/method.
 
