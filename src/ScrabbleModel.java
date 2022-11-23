@@ -24,6 +24,8 @@ public class ScrabbleModel {
     private final ArrayList<Player> players;
     private final ArrayList<Integer> turnList;
 
+    private AIPlayer aiPlayer;
+
     private int turnIndex, currentRow, currentCol;
     private boolean isFirstPlay, isDoubleWord, isTripleWord;
     private int turn;
@@ -48,6 +50,8 @@ public class ScrabbleModel {
 
         //Arraylist of the players in the game
         players = new ArrayList<>();
+
+        aiPlayer = new AIPlayer("ScrabbleAI");
 
         // turn order list
         turnList = new ArrayList<>();
