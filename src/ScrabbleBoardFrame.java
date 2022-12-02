@@ -26,7 +26,6 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView {
 
     private ScrabbleController sc;
 
-
     public ScrabbleBoardFrame() {
         super();
         scorePanel = new ScorePanel();
@@ -49,6 +48,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView {
         scrabbleModel.addScrabbleView(this);
         sc = new ScrabbleController(scrabbleModel);
 
+        //SaveLoad saveLoad = new SaveLoad(this);
     }
 
     /**
@@ -107,6 +107,37 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView {
             super();
             JPanel buttonSection = new JPanel(new FlowLayout(FlowLayout.CENTER));
             buttonSection.setOpaque(false);
+
+            //Initializing undo button
+            JButton undo = new JButton("undo");
+            undo.setFocusPainted(false);
+            undo.setContentAreaFilled(false);
+            undo.setOpaque(true);
+            undo.setBackground(Color.RED);
+            undo.setActionCommand("undo");
+            undo.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+
+                }
+            });
+
+            //Initializing redo button
+            JButton redo = new JButton("redo");
+            redo.setFocusPainted(false);
+            redo.setContentAreaFilled(false);
+            redo.setOpaque(true);
+            redo.setBackground(Color.RED);
+            redo.setActionCommand("redo");
+            redo.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+
+                }
+            });
+
+
+
 
             // Initializing clear Button
             JButton clear = new JButton("clear");
@@ -225,6 +256,10 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView {
             });
 
             // Adding Buttons to Button Section
+            buttonSection.add(undo);
+            buttonSection.add(Box.createHorizontalStrut(5));
+            buttonSection.add(redo);
+            buttonSection.add(Box.createHorizontalStrut(40));
             buttonSection.add(clear);
             buttonSection.add(Box.createHorizontalStrut(5));
             buttonSection.add(play);
@@ -241,7 +276,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView {
         }
 
         // called whenever a turn is made, updates current player at top
-        // needs to be called after players have been initialized, not in this panel's constructor
+        // Should be called after players have been initialized, not in this panel's constructor
         public void showCurrentPlayer() {
             if(playerName == null) {
                 playerName = new JLabel(scrabbleModel.getCurrentPlayerName() + "'s Turn" , SwingConstants.CENTER);

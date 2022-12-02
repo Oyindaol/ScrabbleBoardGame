@@ -17,13 +17,11 @@ public class ScrabbleStart extends JPanel {
     public ScrabbleStart() {
         super();
         super.setLayout(new CardLayout());
+        JPanel panel = this;
 
-
-        JPanel cards = this;
-
-        // Organizing Card 1 (Starting Panel)
-        JPanel card1 = new JPanel();
-        card1.setLayout(new BoxLayout(card1, BoxLayout.Y_AXIS));
+        //Starting Panel
+        JPanel panel1 = new JPanel();
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 
         JLabel title = new JLabel("SCRABBLE GAME!");
         title.setFont(new Font("TimesRoman", Font.BOLD, 70));
@@ -31,13 +29,14 @@ public class ScrabbleStart extends JPanel {
 
         JButton newGame = new JButton("New Game");
         JButton exitGame = new JButton("Exit");
+        JButton loadGame = new JButton("Load Game");
 
         newGame.addActionListener(new ActionListener() {
             @Override
             // Swap to gameCard when "New Game" is pressed
             public void actionPerformed(ActionEvent e) {
-                CardLayout layout = (CardLayout) (cards.getLayout());
-                layout.show(cards, "gameCard");
+                CardLayout layout = (CardLayout) (panel.getLayout());
+                layout.show(panel, "gameCard");
             }
         });
 
@@ -49,33 +48,43 @@ public class ScrabbleStart extends JPanel {
             }
         });
 
-        card1.add(title);
-        card1.add(Box.createVerticalStrut(40));
-        card1.add(stylizeButton(newGame));
-        card1.add(Box.createVerticalStrut(20));
-        //card1.add(stylizeButton(infoButton));
-        card1.add(Box.createVerticalStrut(20));
-        card1.add(stylizeButton(exitGame));
+        loadGame.addActionListener(new ActionListener() {
+            @Override
+            // Load a previous game when the load button is pressed
+            public void actionPerformed(ActionEvent e) {
 
-        // Organizing Card 2 (Game Information)
-        JPanel card2 = new JPanel();
-        card2.setLayout(new BorderLayout());
+
+
+            }
+        });
+
+        panel1.add(title);
+        panel1.add(Box.createVerticalStrut(40));
+        panel1.add(stylizeButton(newGame));
+        panel1.add(Box.createVerticalStrut(20));
+        panel1.add(stylizeButton(loadGame));
+        panel1.add(Box.createVerticalStrut(20));
+        panel1.add(stylizeButton(exitGame));
+
+        //Game init panel
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(new BorderLayout());
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout layout = (CardLayout) (cards.getLayout());
-                layout.show(cards, "startCard");
+                CardLayout layout = (CardLayout) (panel.getLayout());
+                layout.show(panel, "startCard");
             }
         });
 
-        //card2.add(infoBox, BorderLayout.NORTH);
-        card2.add(stylizeButton(backButton), BorderLayout.SOUTH);
+        //panel2.add(infoBox, BorderLayout.NORTH);
+        panel2.add(stylizeButton(backButton), BorderLayout.SOUTH);
 
-        // Organizing Card 3 (Game Setup)
-        JPanel card3 = new JPanel();
-        card3.setLayout(new BoxLayout(card3, BoxLayout.Y_AXIS));
+        //Player init panel
+        JPanel panel3 = new JPanel();
+        panel3.setLayout(new BoxLayout(panel3, BoxLayout.Y_AXIS));
 
         JLabel newGameInfo = new JLabel("<html>Please enter your player names below. The games can have 2-4 players </html>");
         newGameInfo.setFont(new Font("TimesRoman", Font.PLAIN, 16));
@@ -83,7 +92,7 @@ public class ScrabbleStart extends JPanel {
         newGameInfo.setSize(400, 300);
         newGameInfo.setBorder(new EmptyBorder(10, 40, 10, 40));
 
-        JTextField playerInfo = new JTextField("Player One Name");
+        JTextField playerInfo = new JTextField("Enter Player Name");
         JButton back = new JButton("Back");
         JButton startGame = new JButton("Start Game");
         JButton addButton = new JButton("Add Player");
@@ -112,7 +121,7 @@ public class ScrabbleStart extends JPanel {
             @Override
             // Tells the JFrame that it can begin the game
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = (JFrame) SwingUtilities.getRoot(cards);
+                JFrame frame = (JFrame) SwingUtilities.getRoot(panel);
                 frame.getContentPane().removeAll();
                 frame.add(new ScrabbleBoardFrame());
                 frame.revalidate();
@@ -134,7 +143,7 @@ public class ScrabbleStart extends JPanel {
                 }
                 else if(scrabbleModel.getPlayerCount() == 3) {
                     scrabbleModel.addPlayer(playerInfo.getText());
-                    playerInfo.setText("All Player Slots Filled");
+                    playerInfo.setText("Maximum Player's Reached!");
                     playerInfo.setBackground(Color.GRAY);
                     addButton.setBackground(Color.GRAY);
                 }
@@ -147,8 +156,8 @@ public class ScrabbleStart extends JPanel {
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                CardLayout layout = (CardLayout) (cards.getLayout());
-                layout.show(cards, "startCard");
+                CardLayout layout = (CardLayout) (panel.getLayout());
+                layout.show(panel, "startCard");
 
                 // Reset Card 3
                 scrabbleModel.resetPlayers();
@@ -167,14 +176,22 @@ public class ScrabbleStart extends JPanel {
         lastButtons.add(stylizeButton(back));
         lastButtons.add(stylizeButton(startGame));
 
-        card3.add(newGameInfo);
-        card3.add(Box.createVerticalStrut(40));
-        card3.add(addPlayers);
-        card3.add(lastButtons);
+        panel3.add(newGameInfo);
+        panel3.add(Box.createVerticalStrut(40));
+        panel3.add(addPlayers);
+        panel3.add(lastButtons);
 
-        // Adding cards to card layout
-        super.add(card1, "startCard");
-        super.add(card3, "gameCard");
+
+        //Board selection Panel
+        JPanel panel4 = new JPanel();
+        panel4.setLayout(new BoxLayout(panel4, BoxLayout.Y_AXIS));
+
+
+
+
+        // Adding panel to card layout
+        super.add(panel1, "startCard");
+        super.add(panel3, "gameCard");
     }
 
     /**
