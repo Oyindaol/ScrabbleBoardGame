@@ -11,12 +11,14 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.*;
+
 
 /**
  * Main panel where all the nested panels are placed on
  */
-public class ScrabbleBoardFrame extends JPanel implements ScrabbleView {
+public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializable {
     private final ScrabbleModel scrabbleModel = ScrabbleModel.getInstance();
 
     private final BoardPanel boardPanel;
@@ -48,7 +50,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView {
         scrabbleModel.addScrabbleView(this);
         sc = new ScrabbleController(scrabbleModel);
 
-        //SaveLoad saveLoad = new SaveLoad(this);
+        SaveLoad saveLoad = new SaveLoad();
     }
 
     /**
@@ -135,9 +137,6 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView {
 
                 }
             });
-
-
-
 
             // Initializing clear Button
             JButton clear = new JButton("clear");

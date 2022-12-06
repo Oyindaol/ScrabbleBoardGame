@@ -3,23 +3,28 @@
  * Initializes the start screen, Asking for the player names
  *
  * @author Oyindamola Taiwo-Olupeka (101155729)
- * @version December 5, 2022
+ * @version November 13, 2022
  *
  */
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
 
     private JMenuBar menuBar;
     private JMenu OptionsMenu;
-    private JMenuItem Load, Save;
+    private JMenuItem save, load;
+    private SaveLoad saveLoad;
 
     public MainFrame() {
         super("ScrabbleModel Game - Group 17");
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ScrabbleStart scrabbleStart = new ScrabbleStart();
+        saveLoad = new SaveLoad();
+
         super.setLayout(new BorderLayout());
 
         //Initializes the Frame for the Scrabble Game
@@ -40,20 +45,51 @@ public class MainFrame extends JFrame {
         OptionsMenu.setEnabled(true);
 
         //Menu Items
-        Load = new JMenuItem("Load Game");
-        //Load.addActionListener();
-        Load.setEnabled(true);
+        save = new JMenuItem("Save Game");
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                saveLoad.saveGame();
+                JOptionPane.showMessageDialog(save,"SCRABBLE GAME SAVED!", "SAVE GAME", JOptionPane.OK_OPTION);
 
-        Save = new JMenuItem("Save Game");
-        //Save.addActionListener();
-        Save.setEnabled(true);
+            }
+        });
+        save.setEnabled(true);
+
+        load = new JMenuItem("Load Game");
+        load.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int loadDialogButton = JOptionPane.YES_NO_OPTION;
+                JOptionPane.showConfirmDialog(load,"Are you sure you want to load the previous game?\nThis will override the current game.","LOAD GAME",loadDialogButton);
+                if(loadDialogButton == JOptionPane.YES_OPTION){
+                    saveLoad.loadGame();
+                    JOptionPane.showMessageDialog(load,"SCRABBLE GAME LOADED!", "LOAD GAME", JOptionPane.OK_OPTION);
+
+                }
+                else if (loadDialogButton == JOptionPane.NO_OPTION){
+                    remove(loadDialogButton);
+                }
+            }
+        });
+        load.setEnabled(true);
+
 
         //Adding Menus to the Menu Bar
         menuBar.add(OptionsMenu);
 
         //Adding Menu Items to the Menus
-        OptionsMenu.add(Load);
-        OptionsMenu.add(Save);
+        OptionsMenu.add(save);
+        OptionsMenu.add(load);
+
+
+        JButton clear = new JButton("clear");
+        clear.setFocusPainted(false);
+        clear.setContentAreaFilled(false);
+        clear.setOpaque(true);
+        clear.setBackground(Color.RED);
+
+
 
         super.setVisible(true);
     }

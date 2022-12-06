@@ -5,10 +5,11 @@
  * @author: Iyamu C. Ese (101081699)
  * @version October 25th, 2022.
  */
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Player {
+public class Player implements Serializable {
     private final String playerName;
     public int playerScore;
     private ArrayList<Character> playerTiles;

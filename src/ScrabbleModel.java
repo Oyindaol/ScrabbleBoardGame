@@ -14,7 +14,7 @@ import java.io.*;
 import java.util.*;
 
 
-public class ScrabbleModel {
+public class ScrabbleModel implements Serializable {
     private static ScrabbleModel instance = null;
     private final ScrabbleBoard scrabbleBoard;
 
