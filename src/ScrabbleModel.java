@@ -32,6 +32,14 @@ public class ScrabbleModel implements Serializable {
 
     private List<ScrabbleView> views;
 
+    protected Stack<Character> undoStack;
+    protected Stack redoStack;
+
+    int row;
+    int col;
+    List rowColList;
+    String lastIndex;
+
     /**
      * ScrabbleModel constructor
      * Initializes a the default scrabble board and the bonuses
@@ -67,6 +75,10 @@ public class ScrabbleModel implements Serializable {
         isTripleWord = false;
 
         views = new ArrayList<>();
+
+        undoStack = new Stack<>();
+        redoStack = new Stack<>();
+        rowColList = new ArrayList<>();
     }
 
     /**
@@ -230,6 +242,8 @@ public class ScrabbleModel implements Serializable {
      */
     public void playTile(char letter, int row, int col) {
         scrabbleBoard.defaultBoard[row][col] = letter;
+        undoStack.push(letter);
+        rowColList.add("" + row + col);
     }
 
     /**
@@ -517,5 +531,29 @@ public class ScrabbleModel implements Serializable {
         if(instance == null)
             instance = new ScrabbleModel();
         return instance;
+    }
+
+    public void undo(){
+        lastIndex = (String) rowColList.get(rowColList.size() - 1);
+        String[] rowCol = lastIndex.split("");
+        this.row = Integer.parseInt(rowCol[0]);
+        this.col = Integer.parseInt(rowCol[1]);
+        clearTile(this.row, this.col);
+        char temp = undoStack.pop();
+        redoStack.push(temp);
+    }
+
+    private void clearTile(int row, int col) {
+        scrabbleBoard.defaultBoard[row][col] = scrabbleBoard.newBoard[row][col];
+    }
+
+    public void redo(){
+        lastIndex = (String) rowColList.get(rowColList.size() - 1);
+        String[] rowCol = lastIndex.split("");
+        this.row = Integer.parseInt(rowCol[0]);
+        this.col = Integer.parseInt(rowCol[1]);
+        playTile((Character) redoStack.lastElement(), this.row, this.col);
+        redoStack.pop();
+        rowColList.remove(rowColList.size()-1);
     }
 }

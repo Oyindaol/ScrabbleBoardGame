@@ -120,7 +120,9 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             undo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-
+                    scrabbleModel.undo();
+                    boardPanel.resetTile();
+                    //if (scrabbleModel.undoStack.isEmpty()) undo.setEnabled(false);
                 }
             });
 
@@ -134,7 +136,9 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             redo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-
+                    scrabbleModel.redo();
+                    boardPanel.resetTile();
+                    //if (scrabbleModel.redoStack.isEmpty()) redo.setEnabled(false);
                 }
             });
 
@@ -334,6 +338,35 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
                     board[row][col].setText("<html><div style='text-align: center;'>" + board[row][col].getText() + "</div></html>");
                 }
             }
+        }
+
+        public void resetTile(){
+            switch (scrabbleModel.getSquare(scrabbleModel.row, scrabbleModel.col)) {
+                case 1:
+                    board[scrabbleModel.row][scrabbleModel.col].setText("Double Word Score");
+                    board[scrabbleModel.row][scrabbleModel.col].setFont(new Font("Serif", Font.BOLD, 10));
+                    break;
+                case 2:
+                    board[scrabbleModel.row][scrabbleModel.col].setText("Double Letter Score");
+                    board[scrabbleModel.row][scrabbleModel.col].setFont(new Font("Serif", Font.BOLD, 10));
+                    break;
+                case 3:
+                    board[scrabbleModel.row][scrabbleModel.col].setText("Triple Letter Score");
+                    board[scrabbleModel.row][scrabbleModel.col].setFont(new Font("Serif", Font.BOLD, 10));
+                    break;
+                case 4:
+                    board[scrabbleModel.row][scrabbleModel.col].setText("Double Word Score");
+                    board[scrabbleModel.row][scrabbleModel.col].setFont(new Font("Serif", Font.BOLD, 10));
+                    break;
+                case 5:
+                    board[scrabbleModel.row][scrabbleModel.col].setText("Triple Word Score");
+                    board[scrabbleModel.row][scrabbleModel.col].setFont(new Font("Serif", Font.BOLD, 10));
+                    break;
+                default:
+                    board[scrabbleModel.row][scrabbleModel.col].setText(Character.toString(scrabbleModel.getSquare(scrabbleModel.row, scrabbleModel.col)));
+                    break;
+            }
+            board[scrabbleModel.row][scrabbleModel.col].setText("<html><div style='text-align: center;'>" + board[scrabbleModel.row][scrabbleModel.col].getText() + "</div></html>");
         }
 
         private void buildPanel() {
