@@ -502,6 +502,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             super.setBackground(Color.PINK);
         }
 
+        //Method to put tile back in rack after undo move
         public void setTileInRack(){
             Character characterTile = scrabbleModel.rackTile;
             rack = scrabbleModel.getCurrentPlayerRack();
@@ -509,6 +510,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             super.add(stylizeTile(characterTile));
         }
 
+        //Method for duplicated code in setRackPanel and setTileInRack methods
         private JLabel stylizeTile(Character c){    //duplicated code
             JLabel tile = new JLabel(c.toString());
             tile.setOpaque(true);

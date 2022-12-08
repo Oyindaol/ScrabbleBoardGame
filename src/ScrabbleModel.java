@@ -535,6 +535,9 @@ public class ScrabbleModel implements Serializable {
         return instance;
     }
 
+    /**
+     * Method to undo the player's last move
+     */
     public void undo(){
         lastIndexUndo = (String) rowColListUndo.get(rowColListUndo.size() - 1);
         String[] rowCol = lastIndexUndo.split("");
@@ -548,10 +551,18 @@ public class ScrabbleModel implements Serializable {
         rowColListUndo.remove(rowColListUndo.size() - 1);
     }
 
+    /**
+     * Method to clear a tile at a specific board location
+     * @param row
+     * @param col
+     */
     private void clearTile(int row, int col) {
         scrabbleBoard.defaultBoard[row][col] = scrabbleBoard.newBoard[row][col];
     }
 
+    /**
+     * Method to redo the player's last move
+     */
     public void redo(){
         lastIndexRedo = (String) rowColListRedo.get(rowColListRedo.size() - 1);
         String[] rowCol = lastIndexRedo.split("");
