@@ -37,8 +37,9 @@ public class ScrabbleModel implements Serializable {
 
     int row;
     int col;
-    List rowColList;
-    String lastIndex;
+    List rowColListUndo, rowColListRedo;
+    String lastIndexUndo, lastIndexRedo;
+    char rackTile;
 
     /**
      * ScrabbleModel constructor
@@ -78,7 +79,8 @@ public class ScrabbleModel implements Serializable {
 
         undoStack = new Stack<>();
         redoStack = new Stack<>();
-        rowColList = new ArrayList<>();
+        rowColListUndo = new ArrayList<>();
+        rowColListRedo = new ArrayList<>();
     }
 
     /**
@@ -243,7 +245,7 @@ public class ScrabbleModel implements Serializable {
     public void playTile(char letter, int row, int col) {
         scrabbleBoard.defaultBoard[row][col] = letter;
         undoStack.push(letter);
-        rowColList.add("" + row + col);
+        rowColListUndo.add("" + row + col);
     }
 
     /**
@@ -534,13 +536,16 @@ public class ScrabbleModel implements Serializable {
     }
 
     public void undo(){
-        lastIndex = (String) rowColList.get(rowColList.size() - 1);
-        String[] rowCol = lastIndex.split("");
+        lastIndexUndo = (String) rowColListUndo.get(rowColListUndo.size() - 1);
+        String[] rowCol = lastIndexUndo.split("");
         this.row = Integer.parseInt(rowCol[0]);
         this.col = Integer.parseInt(rowCol[1]);
         clearTile(this.row, this.col);
         char temp = undoStack.pop();
         redoStack.push(temp);
+        rackTile = temp;
+        rowColListRedo.add("" + this.row + this.col);
+        rowColListUndo.remove(rowColListUndo.size() - 1);
     }
 
     private void clearTile(int row, int col) {
@@ -548,12 +553,12 @@ public class ScrabbleModel implements Serializable {
     }
 
     public void redo(){
-        lastIndex = (String) rowColList.get(rowColList.size() - 1);
-        String[] rowCol = lastIndex.split("");
+        lastIndexRedo = (String) rowColListRedo.get(rowColListRedo.size() - 1);
+        String[] rowCol = lastIndexRedo.split("");
         this.row = Integer.parseInt(rowCol[0]);
         this.col = Integer.parseInt(rowCol[1]);
         playTile((Character) redoStack.lastElement(), this.row, this.col);
         redoStack.pop();
-        rowColList.remove(rowColList.size()-1);
+        rowColListRedo.remove(rowColListRedo.size()-1);
     }
 }
