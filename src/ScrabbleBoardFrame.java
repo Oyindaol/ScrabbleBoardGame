@@ -122,6 +122,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
                 public void actionPerformed(ActionEvent actionEvent) {
                     scrabbleModel.undo();
                     boardPanel.resetTile();
+                    rackPanel.setTileInRack();
                     //if (scrabbleModel.undoStack.isEmpty()) undo.setEnabled(false);
                 }
             });
@@ -138,6 +139,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
                 public void actionPerformed(ActionEvent actionEvent) {
                     scrabbleModel.redo();
                     boardPanel.resetTile();
+                    rackPanel.setRackPanel();
                     //if (scrabbleModel.redoStack.isEmpty()) redo.setEnabled(false);
                 }
             });
@@ -483,6 +485,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
     public class RackPanel extends JPanel{
         private JLabel currentPiece;
         private ArrayList<Character> rack;
+        private Stack redoRack = new Stack();
 
 
         // create jpanels for all current players tiles, is called whenever turn is ended
@@ -493,27 +496,39 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             rack = scrabbleModel.getCurrentPlayerRack();
             super.setLayout(new FlowLayout(FlowLayout.CENTER,50,0));
             for(Character i : rack) {
-                JLabel tile = new JLabel(i.toString());
-                tile.setOpaque(true);
-                tile.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
-                tile.setFont(new Font("Serif", Font.BOLD, 34));
-                tile.setBackground(Color.YELLOW);
-                tile.setPreferredSize(new Dimension(50,50));
-                tile.setHorizontalAlignment(SwingConstants.CENTER);
-                tile.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        if(currentPiece != null)
-                            currentPiece.setBackground(Color.YELLOW);
-
-                        tile.setBackground(Color.GREEN);
-                        currentPiece = tile;
-                    }
-                });
-                super.add(tile);
+                super.add(stylizeTile(i));
             }
             super.setBorder(BorderFactory.createCompoundBorder(new MatteBorder(2, 0, 0, 0, Color.BLACK), new EmptyBorder(10, 10, 10, 10)));
             super.setBackground(Color.PINK);
+        }
+
+        public void setTileInRack(){
+            Character characterTile = scrabbleModel.rackTile;
+            rack = scrabbleModel.getCurrentPlayerRack();
+            redoRack.push(characterTile);
+            super.add(stylizeTile(characterTile));
+        }
+
+        private JLabel stylizeTile(Character c){    //duplicated code
+            JLabel tile = new JLabel(c.toString());
+            tile.setOpaque(true);
+            tile.setBorder(new MatteBorder(1, 1, 1, 1, Color.BLACK));
+            tile.setFont(new Font("Serif", Font.BOLD, 34));
+            tile.setBackground(Color.YELLOW);
+            tile.setPreferredSize(new Dimension(50,50));
+            tile.setHorizontalAlignment(SwingConstants.CENTER);
+            tile.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if(currentPiece != null)
+                        currentPiece.setBackground(Color.YELLOW);
+
+                    tile.setBackground(Color.GREEN);
+                    currentPiece = tile;
+                }
+            });
+            //super.add(tile);
+            return tile;
         }
 
         public JLabel getCurrentPiece() {
