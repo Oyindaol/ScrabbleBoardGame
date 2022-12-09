@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class ScrabbleStart extends JPanel {
     private final ScrabbleModel scrabbleModel = ScrabbleModel.getInstance();
@@ -52,7 +53,16 @@ public class ScrabbleStart extends JPanel {
             @Override
             // Load a previous game when the load button is pressed
             public void actionPerformed(ActionEvent e) {
-
+                int loadButton = JOptionPane.showConfirmDialog(loadGame, "Are You Sure You Want To Load The Saved Game?\nThe current game will be lost", "LOAD GAME", JOptionPane.YES_NO_OPTION);
+                if (loadButton == JOptionPane.YES_OPTION) {
+                    try {
+                        ScrabbleModel.loadGame();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (ClassNotFoundException ex) {
+                        ex.printStackTrace();
+                    }
+                }
 
 
             }
@@ -210,4 +220,5 @@ public class ScrabbleStart extends JPanel {
         jb.setBorder(BorderFactory.createCompoundBorder(new MatteBorder(2, 2, 2, 2, Color.BLACK), new EmptyBorder(10, 10, 10, 10)));
         return jb;
     }
+
 }

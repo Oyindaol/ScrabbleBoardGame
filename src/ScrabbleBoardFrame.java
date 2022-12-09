@@ -50,7 +50,6 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
         scrabbleModel.addScrabbleView(this);
         sc = new ScrabbleController(scrabbleModel);
 
-        SaveLoad saveLoad = new SaveLoad();
     }
 
     /**
@@ -155,10 +154,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             clear.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    scrabbleModel.resetBoard();
-                    scrabbleModel.resetCurrentPlayer();
-                    boardPanel.reset();
-                    rackPanel.setRackPanel();
+                    handleClear();
                 }
             });
 
@@ -171,13 +167,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             pass.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    scrabbleModel.resetBoard();
-                    scrabbleModel.resetCurrentPlayer();
-                    scrabbleModel.nextPlayer();
-                    boardPanel.reset();
-                    rackPanel.setRackPanel();
-                    buttonPanel.showCurrentPlayer();
-                    scorePanel.updateScores();
+                    handlePass();
                 }
             });
 
@@ -190,20 +180,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             play.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(scrabbleModel.endTurn()) {
-                        scrabbleModel.refillCurrentPlayer();
-                        scrabbleModel.nextPlayer();
-                        boardPanel.reset();
-                        rackPanel.setRackPanel();
-                        buttonPanel.showCurrentPlayer();
-                        scorePanel.updateScores();
-                    }
-                    else {
-                        scrabbleModel.resetBoard();
-                        scrabbleModel.resetCurrentPlayer();
-                        boardPanel.reset();
-                        rackPanel.setRackPanel();
-                    }
+                    handlePlay();
                 }
             });
 
@@ -217,45 +194,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(scrabbleModel.getTurn() > scrabbleModel.getPlayerCount()) {
-                        JDialog dialog = new JDialog();
-                        JPanel dialogPanel = new JPanel();
-                        dialogPanel.setLayout(new BoxLayout(dialogPanel, BoxLayout.Y_AXIS));
-
-                        JLabel info = new JLabel();
-                        info.setFont(new Font("Helvetica", Font.PLAIN, 24));
-                        info.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-                        info.setSize(100, 50);
-                        info.setBorder(new EmptyBorder(10, 40, 10, 40));
-
-                        //multiple winners
-                        if(scrabbleModel.getWinners().size() == 1) info.setText("<html>Congratulations<br/>"+ scrabbleModel.getPlayerName(scrabbleModel.getWinners().get(0))+"</html>");
-                        else {
-                            String text = "<html>Congratulations<br/>";
-                            for(int i : scrabbleModel.getWinners()) {
-                                text+= scrabbleModel.getPlayerName(scrabbleModel.getWinners().get(i))+"<br/>";
-                            }
-                            text +="</html>";
-                            info.setText(text);
-                        }
-
-                        dialogPanel.add(info);
-                        JButton exitBtn = new JButton("Exit");
-                        exitBtn.setFocusPainted(false);
-                        exitBtn.setContentAreaFilled(false);
-                        exitBtn.setOpaque(true);
-                        exitBtn.setBackground(Color.PINK);
-                        exitBtn.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                System.exit(0);
-                            }
-                        });
-                        dialogPanel.add(exitBtn);
-                        dialog.add(dialogPanel);
-                        dialog.setSize(300, 150);
-                        dialog.setUndecorated(true);
-                        dialog.setLocationRelativeTo(null);
-                        dialog.setVisible(true);
+                        handleEndGame();
                     }
                 }
             });
@@ -545,21 +484,99 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
 
     @Override
     public void handlePlay() {
-
+        if(scrabbleModel.endTurn()) {
+            scrabbleModel.refillCurrentPlayer();
+            scrabbleModel.nextPlayer();
+            boardPanel.reset();
+            rackPanel.setRackPanel();
+            buttonPanel.showCurrentPlayer();
+            scorePanel.updateScores();
+        }
+        else {
+            scrabbleModel.resetBoard();
+            scrabbleModel.resetCurrentPlayer();
+            boardPanel.reset();
+            rackPanel.setRackPanel();
+        }
     }
 
     @Override
     public void handleClear() {
-
+        scrabbleModel.resetBoard();
+        scrabbleModel.resetCurrentPlayer();
+        boardPanel.reset();
+        rackPanel.setRackPanel();
     }
 
     @Override
     public void handlePass() {
-
+        scrabbleModel.resetBoard();
+        scrabbleModel.resetCurrentPlayer();
+        scrabbleModel.nextPlayer();
+        boardPanel.reset();
+        rackPanel.setRackPanel();
+        buttonPanel.showCurrentPlayer();
+        scorePanel.updateScores();
     }
 
     @Override
     public void handleEndGame() {
+        if(scrabbleModel.getTurn() > scrabbleModel.getPlayerCount()) {
+            JDialog dialog = new JDialog();
+            JPanel dialogPanel = new JPanel();
+            dialogPanel.setLayout(new BoxLayout(dialogPanel, BoxLayout.Y_AXIS));
 
+            JLabel info = new JLabel();
+            info.setFont(new Font("Helvetica", Font.PLAIN, 24));
+            info.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+            info.setSize(100, 50);
+            info.setBorder(new EmptyBorder(10, 40, 10, 40));
+
+            //multiple winners
+            if(scrabbleModel.getWinners().size() == 1) info.setText("<html>Congratulations<br/>"+ scrabbleModel.getPlayerName(scrabbleModel.getWinners().get(0))+"</html>");
+            else {
+                String text = "<html>Congratulations<br/>";
+                for(int i : scrabbleModel.getWinners()) {
+                    text+= scrabbleModel.getPlayerName(scrabbleModel.getWinners().get(i))+"<br/>";
+                }
+                text +="</html>";
+                info.setText(text);
+            }
+
+            dialogPanel.add(info);
+            JButton exitBtn = new JButton("Exit");
+            exitBtn.setFocusPainted(false);
+            exitBtn.setContentAreaFilled(false);
+            exitBtn.setOpaque(true);
+            exitBtn.setBackground(Color.PINK);
+            exitBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialogPanel.add(exitBtn);
+            dialog.add(dialogPanel);
+            dialog.setSize(300, 150);
+            dialog.setUndecorated(true);
+            dialog.setLocationRelativeTo(null);
+            dialog.setVisible(true);
+        }
+    }
+
+    @Override
+    public void handleUndo() {
+        scrabbleModel.undo();
+        boardPanel.resetTile();
+        rackPanel.setTileInRack();
+        //if (scrabbleModel.undoStack.isEmpty()) undo.setEnabled(false);
+    }
+
+    @Override
+    public void handleRedo() {
+        scrabbleModel.redo();
+        boardPanel.resetTile();
+        rackPanel.setRackPanel();
+        //if (scrabbleModel.redoStack.isEmpty()) redo.setEnabled(false);
     }
 }

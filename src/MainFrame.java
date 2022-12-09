@@ -9,21 +9,21 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import javax.swing.*;
 
 public class MainFrame extends JFrame {
 
     private JMenuBar menuBar;
     private JMenu OptionsMenu;
-    private JMenuItem save, load;
-    private SaveLoad saveLoad;
+    private JMenuItem saveGame, loadGame;
+    private ScrabbleModel scrabbleModel;
 
     public MainFrame() {
         super("ScrabbleModel Game - Group 17");
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ScrabbleStart scrabbleStart = new ScrabbleStart();
-        saveLoad = new SaveLoad();
 
         super.setLayout(new BorderLayout());
 
@@ -45,42 +45,50 @@ public class MainFrame extends JFrame {
         OptionsMenu.setEnabled(true);
 
         //Menu Items
-        save = new JMenuItem("Save Game");
-        save.addActionListener(new ActionListener() {
+        saveGame = new JMenuItem("Save Game");
+        saveGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                saveLoad.saveGame();
-                JOptionPane.showMessageDialog(save,"SCRABBLE GAME SAVED!", "SAVE GAME", JOptionPane.OK_OPTION);
-
-            }
-        });
-        save.setEnabled(true);
-
-        load = new JMenuItem("Load Game");
-        load.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int loadDialogButton = JOptionPane.YES_NO_OPTION;
-                JOptionPane.showConfirmDialog(load,"Are you sure you want to load the previous game?\nThis will override the current game.","LOAD GAME",loadDialogButton);
-                if(loadDialogButton == JOptionPane.YES_OPTION){
-                    saveLoad.loadGame();
-                    JOptionPane.showMessageDialog(load,"SCRABBLE GAME LOADED!", "LOAD GAME", JOptionPane.OK_OPTION);
-
+                int saveButton = JOptionPane.showConfirmDialog(saveGame,"Are You Sure You Want To Save This Game?","SAVE GAME",JOptionPane.YES_NO_OPTION);
+                if (saveButton == JOptionPane.YES_OPTION){
+                    try {
+                        ScrabbleModel.saveGame(scrabbleModel);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-                else if (loadDialogButton == JOptionPane.NO_OPTION){
-                    remove(loadDialogButton);
+                else{
+
                 }
             }
         });
-        load.setEnabled(true);
+        saveGame.setEnabled(true);
+
+        loadGame = new JMenuItem("Load Game");
+        loadGame.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int loadButton = JOptionPane.showConfirmDialog(loadGame, "Are You Sure You Want To Load The Saved Game?\nThe current game will be lost", "LOAD GAME", JOptionPane.YES_NO_OPTION);
+                if (loadButton == JOptionPane.YES_OPTION) {
+                    try {
+                        ScrabbleModel.loadGame();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        loadGame.setEnabled(true);
 
 
         //Adding Menus to the Menu Bar
         menuBar.add(OptionsMenu);
 
         //Adding Menu Items to the Menus
-        OptionsMenu.add(save);
-        OptionsMenu.add(load);
+        OptionsMenu.add(saveGame);
+        OptionsMenu.add(loadGame);
 
 
         JButton clear = new JButton("clear");
@@ -88,7 +96,6 @@ public class MainFrame extends JFrame {
         clear.setContentAreaFilled(false);
         clear.setOpaque(true);
         clear.setBackground(Color.RED);
-
 
 
         super.setVisible(true);

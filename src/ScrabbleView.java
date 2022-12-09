@@ -13,4 +13,8 @@ public interface ScrabbleView {
     void handlePass();
 
     void handleEndGame();
+
+    void handleUndo();
+
+    void handleRedo();
 }

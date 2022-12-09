@@ -572,4 +572,36 @@ public class ScrabbleModel implements Serializable {
         redoStack.pop();
         rowColListRedo.remove(rowColListRedo.size()-1);
     }
+
+    public static void saveGame(Object o) throws IOException {
+
+        //save board
+        FileOutputStream fosBoard = new FileOutputStream("saveLoadFile.txt");
+        ObjectOutputStream oosBoard = new ObjectOutputStream(fosBoard);
+        oosBoard.writeObject(o);
+//        oosBoard.flush();
+//        oosBoard.close();
+        System.out.println("ScrabbleGame Saved!\n");
+
+        //save players
+//        FileOutputStream fosPlayers = new FileOutputStream(filename + ".txt");
+//        ObjectOutputStream oosPlayers = new ObjectOutputStream(fosPlayers);
+//        oosPlayers.writeObject(model);
+//        oosPlayers.flush();
+//        oosPlayers.close();
+
+        //save rack
+
+    }
+
+    public static ScrabbleModel loadGame() throws IOException, ClassNotFoundException {
+
+        FileInputStream fis = new FileInputStream("saveLoadFile.txt");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        ScrabbleModel model = (ScrabbleModel) ois.readObject();
+        return model;
+        //ois.close();
+        //System.out.println("\nScrabbleGame Loaded!");
+
+    }
 }
