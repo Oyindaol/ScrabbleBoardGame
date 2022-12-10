@@ -35,11 +35,11 @@ public class ScrabbleModel implements Serializable {
     protected Stack<Character> undoStack;
     protected Stack redoStack;
 
-    int row;
-    int col;
-    List rowColListUndo, rowColListRedo;
-    String lastIndexUndo, lastIndexRedo;
-    char rackTile;
+    protected int row;
+    protected int col;
+    private List rowColListUndo, rowColListRedo;
+    private String lastIndexUndo, lastIndexRedo;
+    protected char rackTile;
 
     /**
      * ScrabbleModel constructor
