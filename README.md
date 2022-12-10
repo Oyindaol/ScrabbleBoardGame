@@ -26,8 +26,10 @@ A GUI-based version of Scrabble where players use a mouse to click and place til
 - Added Java Doc comments to classes and methods.
 
 ### Known Issues
-- Currently the undo/redo method is functional when trying with 4-letter words maximum, when over that we receive an index out-of-bounds error.
-- The AI player is not fully functional. We have not been able to give the player the full functionality that a Human player would have.
+- Currently the undo/redo method is functional but when we undo all the tiles played, you have to hit the clear button to reset the turn or else you get an index out of bounds error.
+- The AI player is not fully functional. We have not been able to give the player the full functionality that a Human player would have. 
+- There is an issue with allowing invalid words.
+
 
 
 ## Change Log
