@@ -56,7 +56,7 @@ A GUI-based version of Scrabble where players use a mouse to click and place til
 - Creation of blank tiles, premium squares and AI players.
 - Design of Scrabble move generation algorithm/method.
 
-### December 5, 2022
+### December 9, 2022
 - Addition of multiple game level undo and redo features.
 - Save and load features.
 - Creation of custom boards.
