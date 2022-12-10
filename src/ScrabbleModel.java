@@ -245,7 +245,7 @@ public class ScrabbleModel implements Serializable {
     public void playTile(char letter, int row, int col) {
         scrabbleBoard.defaultBoard[row][col] = letter;
         undoStack.push(letter);
-        rowColListUndo.add("" + row + col);
+        rowColListUndo.add(row + "&" + col);
     }
 
     /**
@@ -540,14 +540,14 @@ public class ScrabbleModel implements Serializable {
      */
     public void undo(){
         lastIndexUndo = (String) rowColListUndo.get(rowColListUndo.size() - 1);
-        String[] rowCol = lastIndexUndo.split("");
+        String[] rowCol = lastIndexUndo.split("&");
         this.row = Integer.parseInt(rowCol[0]);
         this.col = Integer.parseInt(rowCol[1]);
         clearTile(this.row, this.col);
         char temp = undoStack.pop();
         redoStack.push(temp);
         rackTile = temp;
-        rowColListRedo.add("" + this.row + this.col);
+        rowColListRedo.add(this.row + "&" + this.col);
         rowColListUndo.remove(rowColListUndo.size() - 1);
     }
 
@@ -565,12 +565,12 @@ public class ScrabbleModel implements Serializable {
      */
     public void redo(){
         lastIndexRedo = (String) rowColListRedo.get(rowColListRedo.size() - 1);
-        String[] rowCol = lastIndexRedo.split("");
+        String[] rowCol = lastIndexRedo.split("&");
         this.row = Integer.parseInt(rowCol[0]);
         this.col = Integer.parseInt(rowCol[1]);
         playTile((Character) redoStack.lastElement(), this.row, this.col);
         redoStack.pop();
-        rowColListRedo.remove(rowColListRedo.size()-1);
+        rowColListRedo.remove(rowColListRedo.size() - 1);
     }
 
     /**

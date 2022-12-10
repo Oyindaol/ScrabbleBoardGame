@@ -140,7 +140,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
                 public void actionPerformed(ActionEvent actionEvent) {
                     scrabbleModel.redo();
                     boardPanel.resetTile();
-                    rackPanel.setRackPanel();
+                    rackPanel.removeTileFromRack();
                     //if (scrabbleModel.redoStack.isEmpty()) redo.setEnabled(false);
                 }
             });
@@ -437,7 +437,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
     public class RackPanel extends JPanel{
         private JLabel currentPiece;
         private ArrayList<Character> rack;
-        private Stack redoRack = new Stack();
+        private Stack<Character> redoRack = new Stack();
 
 
         /**
@@ -467,6 +467,17 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
         }
 
         /**
+         * Method to remove tile from rack after redo move
+         */
+        public void removeTileFromRack(){
+            setRackPanel();
+            redoRack.pop();
+            for (char ch : redoRack){
+                super.add(stylizeTile(ch));
+            }
+        }
+
+        /**
          * Method for duplicated code in setRackPanel and setTileInRack methods
          *
          * @param c
@@ -490,7 +501,6 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
                     currentPiece = tile;
                 }
             });
-            //super.add(tile);
             return tile;
         }
 
