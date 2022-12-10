@@ -121,10 +121,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             undo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    scrabbleModel.undo();
-                    boardPanel.resetTile();
-                    rackPanel.setTileInRack();
-                    //if (scrabbleModel.undoStack.isEmpty()) undo.setEnabled(false);
+                    handleUndo();
                 }
             });
 
@@ -138,10 +135,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             redo.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    scrabbleModel.redo();
-                    boardPanel.resetTile();
-                    rackPanel.removeTileFromRack();
-                    //if (scrabbleModel.redoStack.isEmpty()) redo.setEnabled(false);
+                    handleRedo();
                 }
             });
 
