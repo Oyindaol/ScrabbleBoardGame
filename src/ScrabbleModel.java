@@ -581,22 +581,12 @@ public class ScrabbleModel implements Serializable {
      */
     public static void saveGame(Object o) throws IOException {
 
-        //save board
-        FileOutputStream fosBoard = new FileOutputStream("saveLoadFile.txt");
-        ObjectOutputStream oosBoard = new ObjectOutputStream(fosBoard);
-        oosBoard.writeObject(o);
+        FileOutputStream fos = new FileOutputStream("saveLoadFile.txt");
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(o);
 //        oosBoard.flush();
 //        oosBoard.close();
         System.out.println("ScrabbleGame Saved!\n");
-
-        //save players
-//        FileOutputStream fosPlayers = new FileOutputStream(filename + ".txt");
-//        ObjectOutputStream oosPlayers = new ObjectOutputStream(fosPlayers);
-//        oosPlayers.writeObject(model);
-//        oosPlayers.flush();
-//        oosPlayers.close();
-
-        //save rack
 
     }
 
