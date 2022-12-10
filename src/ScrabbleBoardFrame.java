@@ -616,7 +616,7 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
     public void handleRedo() {
         scrabbleModel.redo();
         boardPanel.resetTile();
-        rackPanel.setRackPanel();
+        rackPanel.removeTileFromRack();
         //if (scrabbleModel.redoStack.isEmpty()) redo.setEnabled(false);
     }
 }

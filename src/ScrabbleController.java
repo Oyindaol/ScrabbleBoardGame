@@ -111,7 +111,7 @@ public class ScrabbleController implements ActionListener {
         else if(e.getActionCommand() == "redo"){
             model.redo();
             boardPanel.resetTile();
-            rackPanel.setRackPanel();
+            rackPanel.removeTileFromRack();
             //if (scrabbleModel.redoStack.isEmpty()) redo.setEnabled(false);
         }
 
