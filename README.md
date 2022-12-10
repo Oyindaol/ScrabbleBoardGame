@@ -26,22 +26,22 @@ A GUI-based version of Scrabble where players use a mouse to click and place til
 - Added Java Doc comments to classes and methods.
 
 ### Known Issues
-- The AI player is not fully functional. We have not been able to give the player the full functionality that a Human player would have. We aim to fix it completely for the next milestone.
+- Currently the undo/redo method is functional when trying with 4-letter words maximum, when over that we receive an index out-of-bounds error.
+- The AI player is not fully functional. We have not been able to give the player the full functionality that a Human player would have.
 
-## Future Milestones and Deliverables
-### Milestone 4
-- Add a multiple-level undo and redo feature.
-- Implement Java Serialization and utilize it to add a save and load feature.
-- Create custom boards with the alternate placement of premium squares using XML or JSON.
-- Update documentation.
 
 ## Change Log
-- We made the ScrabbleGame class the ScrabbleModel class and the ScrabbleBoard class the ScrabbleBoardFrame class.
 - The ScrabbleController and ScrabbleView classes were added to align with the MVC pattern.
-- We moved the main method to the MainFrame class which also calls the ScrabbleStart class which begins the game by asking the player names for the game. This was a stylistic choice.
-- The ScrabbleModel class was divided into two supporting classes: TileBag and ScrabbleBoard. This was another choice made in alignment with the MVC pattern and to reduce the responsibility of the ScrabbleModel class.
 - The Player class was refactored to work better with the model class.
-- We created the AIPlayer class to represent the computer player (“ScrabbleBot”). 
+- We created the AIPlayer class to represent the computer player (“ScrabbleBot”).
+- We implemented the observable for better MVC communication.
+- We fixed the JAR file.
+- We implemented Serializable for the frame, model and player classes
+- We added a menu bar with menu items (Save Game and Load Game) to the MainFrame class just for better functionality.
+- Also added a load button to the first card. 
+- We added methods and buttons for the save and load functions for the game.
+- We added methods and buttons for the undo and redo functions for the game.
+
 
 ## Roadmap
 ### October 23, 2022
