@@ -1,3 +1,10 @@
+/**
+ * Class AI player handles all about an AI player.
+ * Extends Player class and gives it the same ability as a human player.
+ *
+ * @version December 9th, 2022.
+ */
+
 import java.io.*;
 import java.util.ArrayList;
 

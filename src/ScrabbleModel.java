@@ -7,7 +7,7 @@
  * score between the players.
  *
  * @author Oluwatomisin Ajayi (101189490)
- * @version November 13, 2022;
+ * @version December 9th, 2022.
  *
  */
 import java.io.*;
@@ -573,6 +573,12 @@ public class ScrabbleModel implements Serializable {
         rowColListRedo.remove(rowColListRedo.size()-1);
     }
 
+    /**
+     * Saves the current game
+     *
+     * @param o
+     * @throws IOException
+     */
     public static void saveGame(Object o) throws IOException {
 
         //save board
@@ -594,6 +600,13 @@ public class ScrabbleModel implements Serializable {
 
     }
 
+    /**
+     * Loads the previously saved game
+     *
+     * @return
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
     public static ScrabbleModel loadGame() throws IOException, ClassNotFoundException {
 
         FileInputStream fis = new FileInputStream("saveLoadFile.txt");

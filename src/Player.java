@@ -3,7 +3,7 @@
  * initializes the players scores to 0.
  *
  * @author: Iyamu C. Ese (101081699)
- * @version October 25th, 2022.
+ * @version December 9th, 2022.
  */
 import java.io.*;
 import java.util.ArrayList;

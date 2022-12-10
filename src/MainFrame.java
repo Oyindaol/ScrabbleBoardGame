@@ -3,7 +3,7 @@
  * Initializes the start screen, Asking for the player names
  *
  * @author Oyindamola Taiwo-Olupeka (101155729)
- * @version November 13, 2022
+ * @version December 9th, 2022.
  *
  */
 import java.awt.*;

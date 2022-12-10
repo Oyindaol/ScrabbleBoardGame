@@ -2,7 +2,7 @@
  * Scrabble controller class to handle the action listeners
  *
  * @author Ese C. Iyamu (101081699)
- * @version November 13, 2022
+ * @version December 9th, 2022.
  */
 
 import javax.swing.*;
@@ -101,6 +101,18 @@ public class ScrabbleController implements ActionListener {
                 dialog.setVisible(true);
             }
 
+        }
+        else if(e.getActionCommand() == "undo"){
+            model.undo();
+            boardPanel.resetTile();
+            rackPanel.setTileInRack();
+            //if (scrabbleModel.undoStack.isEmpty()) undo.setEnabled(false);
+        }
+        else if(e.getActionCommand() == "redo"){
+            model.redo();
+            boardPanel.resetTile();
+            rackPanel.setRackPanel();
+            //if (scrabbleModel.redoStack.isEmpty()) redo.setEnabled(false);
         }
 
     }

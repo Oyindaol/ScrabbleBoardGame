@@ -2,7 +2,7 @@
  * Updates the Scrabble view
  *
  * @author Oluwatomisin Ajayi (101189490)
- * @version November 13, 2022
+ * @version December 9th, 2022.
  */
 public interface ScrabbleView {
 

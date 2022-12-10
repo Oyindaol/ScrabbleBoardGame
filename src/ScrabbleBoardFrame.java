@@ -4,7 +4,7 @@
  *Contains nested classes to build the frame and its panels
  *
  * @author Oyindamola Taiwo-Olupeka (101155729)
- * @version
+ * @version December 9th, 2022.
  */
 
 import javax.swing.*;
@@ -79,7 +79,9 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             updateScores();
         }
 
-        // called whenever a turn is made, updates current player scores
+        /**
+         * Method called whenever a turn is made, updates current player scores
+         */
         public void updateScores() {
             removeAll();
             super.add(infoBox, BorderLayout.SOUTH);
@@ -219,8 +221,10 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             super.setBackground(Color.PINK);
         }
 
-        // called whenever a turn is made, updates current player at top
-        // Should be called after players have been initialized, not in this panel's constructor
+        /**
+         * Method called whenever a turn is made, updates current player at top
+         * should be called after players have been initialized, not in this panel's constructor
+         */
         public void showCurrentPlayer() {
             if(playerName == null) {
                 playerName = new JLabel(scrabbleModel.getCurrentPlayerName() + "'s Turn" , SwingConstants.CENTER);
@@ -248,6 +252,9 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
         }
 
 
+        /**
+         * A reset method used for clearing the board
+         */
         public void reset() {
             for(int row = 0; row < 15; row++) {
                 for(int col = 0; col < 15; col++) {
@@ -281,6 +288,9 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             }
         }
 
+        /**
+         * Method to reset the tiles
+         */
         public void resetTile(){
             switch (scrabbleModel.getSquare(scrabbleModel.row, scrabbleModel.col)) {
                 case 1:
@@ -310,6 +320,9 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             board[scrabbleModel.row][scrabbleModel.col].setText("<html><div style='text-align: center;'>" + board[scrabbleModel.row][scrabbleModel.col].getText() + "</div></html>");
         }
 
+        /**
+         * Method to build the grid panel
+         */
         private void buildPanel() {
             // Formatting Panel and Generating Grid
             super.setLayout(new GridLayout(15, 15));
@@ -427,9 +440,11 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
         private Stack redoRack = new Stack();
 
 
-        // create jpanels for all current players tiles, is called whenever turn is ended
-        // needs to be function which is explicitly called
-        // cannot be done in constructor because players will not have been initialized yet
+        /**
+         * Method creates jpanels for all current players tiles, is called whenever turn is ended
+         * needs to be function which is explicitly called
+         * cannot be done in constructor because players will not have been initialized yet
+         */
         public void setRackPanel(){
             removeAll();
             rack = scrabbleModel.getCurrentPlayerRack();
@@ -441,7 +456,9 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             super.setBackground(Color.PINK);
         }
 
-        //Method to put tile back in rack after undo move
+        /**
+         * Method to put tile back in rack after undo move
+         */
         public void setTileInRack(){
             Character characterTile = scrabbleModel.rackTile;
             rack = scrabbleModel.getCurrentPlayerRack();
@@ -449,7 +466,12 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             super.add(stylizeTile(characterTile));
         }
 
-        //Method for duplicated code in setRackPanel and setTileInRack methods
+        /**
+         * Method for duplicated code in setRackPanel and setTileInRack methods
+         *
+         * @param c
+         * @return
+         */
         private JLabel stylizeTile(Character c){    //duplicated code
             JLabel tile = new JLabel(c.toString());
             tile.setOpaque(true);
@@ -472,10 +494,18 @@ public class ScrabbleBoardFrame extends JPanel implements ScrabbleView, Serializ
             return tile;
         }
 
+        /**
+         * Getter method to return the current piece
+         *
+         * @return currentPiece
+         */
         public JLabel getCurrentPiece() {
             return currentPiece;
         }
 
+        /**
+         * Method to reset current piece
+         */
         public void resetCurrentPiece() {
             currentPiece = null;
         }

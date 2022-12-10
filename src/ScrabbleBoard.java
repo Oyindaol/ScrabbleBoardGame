@@ -1,3 +1,10 @@
+/**
+ * ScrabbleBoard class to initialize the boards of the game.
+ * Used by the Model.
+ *
+ * @version December 9th, 2022.
+ */
+
 public class ScrabbleBoard {
     protected final char[][] defaultBoard;
     protected final char[][] newBoard;

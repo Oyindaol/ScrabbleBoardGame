@@ -1,3 +1,10 @@
+/**
+ * Tile Bag class is used to distribute tiles for the game and map the values to the tiles.
+ * Used by the Model.
+ *
+ * @version December 9th, 2022.
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 
